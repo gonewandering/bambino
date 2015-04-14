@@ -1,0 +1,37 @@
+<div id="page-editor">
+	<h1>Edit {{ page.title }}</h1>
+	<hr />
+	<form action="/editor/pages" method="post">
+		<div class="form-group">
+			<label for="title">Page Title</label>
+			<input class="form-control input-lg" type="text" name="title" value="{{ page.title }}" placeholder="Home page...">
+		</div>
+		<div class="form-group">
+			<label for="title">Page Slug</label>
+			<input class="form-control input-lg" type="text" name="slug" value="{{ page.slug }}" placeholder="Home page url...">
+		</div>
+		<div class="form-group">
+			<label for="title">Page Template</label>
+			<input class="form-control input-lg" type="text" name="template" value="{{ page.template }}" placeholder="general, etc.">
+		</div>
+		<div class="form-group">
+			<label for="title">Metadescription for Page</label>
+			<input class="form-control input-lg" type="text" name="meta" value="{{ page.meta }}" placeholder="I am an artist...">
+		</div>
+		<div class="form-group">
+			<label for="title">Is this page Active?</label>
+			<input class="form-control input-lg" type="checkbox" checked="{{ page.active }}" value="{{ page.active }}" name="active">
+		</div>
+		<div class="form-group">
+			<label for="title">Is this a blog post?</label>
+			<input class="form-control input-lg" type="checkbox" checked="{{ page.post }}" value="{{ page.post }}" name="post">
+		</div>
+		<div class="form-group">
+			<label for="title">Page Content?</label>
+			<textarea name="content" class="form-control input-lg" value="{{ page.content }}" placholder="HTML Content for this page"></textarea>
+		</div>
+		<hr />
+		<input type="hidden" name="id" value="{{ page.id }}">
+		<button class="btn btn-lg btn-block">Add Page</button>
+	</form>
+</div>

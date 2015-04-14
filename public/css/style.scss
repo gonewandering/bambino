@@ -1,0 +1,68 @@
+@import '../components/bootstrap-sass/assets/stylesheets/bootstrap.scss';
+
+$gray: #EEE;
+
+body {
+  padding: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: white;
+  margin-left: 50px;
+}
+
+section { 
+	background: white;
+	border-right: solid 1px darken($gray, 10);
+	height: 100vh;
+
+	&:first-child { 
+		border-left: none;
+	}
+
+	&.navigation { 
+		background: darken($gray, 10);
+		border-right: solid 1px white;
+
+		thead { 
+			background: darken($gray, 30);
+			color: $gray;
+		}
+
+		tbody { 
+			a { 
+				color: darken($gray, 30);
+			}
+
+			tr { 
+				background: $gray;
+			}
+		}
+
+		tfoot { 
+			a { 
+				color: white;
+			}
+		}
+	}
+}
+
+section.sidebar { 
+	position: fixed; 
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 100vh;
+	background: darken($gray, 60);
+}
+
+a {
+  color: #00B7FF;
+}
+
+.navbar { 
+	margin-bottom: 0;
+}
+
+#editor { 
+	padding: 20px;
+}
+	
