@@ -25,9 +25,7 @@ router.get('/:slug', function (req, res, next) {
 					res.render(page.template || 'index', page);
 				});
 			} else { 
-				page.layout = false;
 
-				console.log(config.theme + page.template);
 				res.render(config.theme + page.template || 'index', page);
 			}
 		});
@@ -54,7 +52,6 @@ router.get('/', function (req, res, next) {
 						res.render(config.theme + page.template || 'index', page);
 					});
 				} else { 
-					page.layout = false;
 					res.render(page.template || 'index', page);
 				}
 			});

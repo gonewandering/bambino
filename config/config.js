@@ -5,7 +5,7 @@ var path = require('path'),
 var config = {
   development: {
     root: rootPath,
-    theme: 'emilysilver/',
+    theme: 'bark-bark/',
     app: {
       name: 'bambino'
     },
@@ -16,7 +16,7 @@ var config = {
 
   test: {
     root: rootPath,
-    theme: 'emilysilver/',
+    theme: 'bark-bark/',
     app: {
       name: 'bambino'
     },
@@ -27,7 +27,7 @@ var config = {
 
   production: {
     root: rootPath,
-    theme: 'emilysilver/',
+    theme: 'bark-bark/',
     app: {
       name: 'bambino'
     },
