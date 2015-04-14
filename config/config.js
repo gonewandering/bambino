@@ -5,32 +5,35 @@ var path = require('path'),
 var config = {
   development: {
     root: rootPath,
+    theme: 'emilysilver/',
     app: {
-      name: 'emilysilver'
+      name: 'bambino'
     },
     port: 3000,
-    db: 'sqlite://localhost/emilysilver-development',
-    storage: rootPath + '/data/emilysilver-development'
+    db: 'sqlite://localhost/bambino-development',
+    storage: rootPath + '/data/bambino-development'
   },
 
   test: {
     root: rootPath,
+    theme: 'emilysilver/',
     app: {
-      name: 'emilysilver'
+      name: 'bambino'
     },
     port: 3000,
-    db: 'sqlite://localhost/emilysilver-test',
-    storage: rootPath + '/data/emilysilver-test'
+    db: 'sqlite://localhost/bambino-test',
+    storage: rootPath + '/data/bambino-test'
   },
 
   production: {
     root: rootPath,
+    theme: 'emilysilver/',
     app: {
-      name: 'emilysilver'
+      name: 'bambino'
     },
     port: 3000,
-    db: 'sqlite://localhost/emilysilver-production',
-    storage: rootPath + 'data/emilysilver-production'
+    db: 'sqlite://localhost/bambino-production',
+    storage: rootPath + 'data/bambino-production'
   }
 };
 

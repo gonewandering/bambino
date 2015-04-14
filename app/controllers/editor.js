@@ -27,7 +27,8 @@ var getAll = function (callback) {
 
 router.get('/', function (req, res, next) {
     getAll(function (options) { 
-        res.render('editor', options);
+        options.layout = false;
+        res.render('editor/editor', options);
     });
 });
 
@@ -39,7 +40,8 @@ router.get('/pages', function (req, res, next) {
     getAll(function (options) { 
 
         options.page = { active: true };
-        res.render('editor', options);
+        options.layout = false;
+        res.render('editor/editor', options);
     });
 });
 
@@ -59,7 +61,8 @@ router.get('/pages/:id', function (req, res, next) {
 
             item.getGalleries().then(function(galleries) { 
                 options.page.galleries = galleries;
-                res.render('editor', options);
+                options.layout = false;
+                res.render('editor/editor', options);
             });
         });
     });
@@ -99,7 +102,8 @@ router.get('/galleries', function (req, res, next) {
     getAll(function (options) { 
 
         options.gallery = true;
-        res.render('editor', options);
+        options.layout = false;
+        res.render('editor/editor', options);
     });
 });
 
@@ -119,7 +123,8 @@ router.get('/galleries/:id', function (req, res, next) {
             item.getArtworks().then(function(artworks) { 
 
                 options.gallery.artworks = artworks;
-                res.render('editor', options);
+                options.layout = false;
+                res.render('editor/editor', options);
 
             });
         });
@@ -160,7 +165,8 @@ router.get('/artworks', function (req, res, next) {
     getAll(function (options) { 
 
         options.artwork = true;
-        res.render('editor', options);
+        options.layout = false;
+        res.render('editor/editor', options);
     });
 });
 
@@ -172,10 +178,11 @@ router.get('/artworks/:id', function (req, res, next) {
                d.class = d.id == item.id ? 'active' : '';
                return d;
             });
-        
+
             options.artwork = item;
             options.active = 'gallery';
-            res.render('editor', options);
+            options.layout = false;
+            res.render('editor/editor', options);
 
         });
     });

@@ -33,13 +33,15 @@ module.exports = function (grunt) {
         files: [
           'app.js',
           'app/**/*.js',
-          'config/*.js'
+          'config/*.js',
+          'themes/**/js/*.js'
         ],
         tasks: ['develop', 'delayed-livereload']
       },
       css: {
         files: [
-          'public/css/*.scss'
+          'public/css/*.scss',
+          'themes/**/css/*.scss'
         ],
         tasks: ['sass'],
         options: {
@@ -49,7 +51,8 @@ module.exports = function (grunt) {
       views: {
         files: [
           'app/views/*.handlebars',
-          'app/views/**/*.handlebars'
+          'app/views/**/*.handlebars',
+          'app/themes/**/*.handlebars'
         ],
         options: { livereload: reloadPort }
       }

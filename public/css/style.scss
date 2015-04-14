@@ -5,41 +5,66 @@ $gray: #EEE;
 body {
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: white;
+  background: darken($gray, 35);
   margin-left: 50px;
+  font-weight: 300;
 }
 
 section { 
-	background: white;
 	border-right: solid 1px darken($gray, 10);
 	height: 100vh;
+	overflow-y: scroll;
 
 	&:first-child { 
 		border-left: none;
 	}
 
+	&.editor { 
+		background: darken($gray, 45);
+		box-shadow: 0 0 50px rgba(darken($gray, 60), .7);
+	}
+
 	&.navigation { 
-		background: darken($gray, 10);
-		border-right: solid 1px white;
+		background: darken($gray, 45);
+		border-right: none;
+		box-shadow: 0 0 50px rgba(darken($gray, 60), .7);
 
 		thead { 
-			background: darken($gray, 30);
+			background: darken($gray, 50);
 			color: $gray;
+
+			th { 
+				border-bottom: none;
+			}
 		}
 
 		tbody { 
 			a { 
-				color: darken($gray, 30);
+				color: darken($gray, 20);
 			}
 
 			tr { 
-				background: $gray;
+				&.active { 
+					background: darken($gray, 40);
+
+					td { 
+						background: transparent;
+					}
+				}
+				td { 
+					border: none;
+				}
 			}
 		}
 
 		tfoot { 
 			a { 
 				color: white;
+			}
+
+			td { 
+				border-top: none;
+				border-top: solid 2px darken($gray, 55);
 			}
 		}
 	}
@@ -63,6 +88,48 @@ a {
 }
 
 #editor { 
-	padding: 20px;
+	padding: 0px;
+
+	form { 
+		margin-top: 30px;
+	}
+	.title { 
+		background: darken($gray, 50);
+		color: white;
+		padding: 9px;
+		font-weight: 800;
+	}
+
+	input, textarea { 
+		background: darken($gray, 40);
+		border-width: 0;
+		color: white;
+	}
+
+	.btn { 
+		border-radius: 0;
+	}
+
+	label { 
+		color: darken($gray, 15);
+		text-transform: uppercase;
+		font-weight: normal;
+		margin-left: 10px;
+		font-size: .9em;
+	}
+
+	.artwork { 
+		text-align: center;
+		background: darken($gray, 55);
+		padding: 20px;
+		img { 
+			display: inline;
+			border-radius: 5px;
+		}
+	}
+
+	button { 
+		margin: 30px 0;
+	}
 }
 	

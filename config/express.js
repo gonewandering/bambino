@@ -10,12 +10,30 @@ var methodOverride = require('method-override');
 var exphbs  = require('express-handlebars');
 
 module.exports = function(app, config) {
-  app.engine('handlebars', exphbs({
-    layoutsDir: config.root + '/app/views/layouts/',
-    defaultLayout: 'main',
-    partialsDir: [config.root + '/app/views/partials/']
-  }));
-  app.set('views', config.root + '/app/views');
+  // app.engine('handlebars', exphbs({
+  //   layoutsDir: config.root + '/themes/'+config.theme+'/layouts/',
+  //   partialsDir: [config.root + '/themes/'+config.theme+'/partials/', config.root + '/themes/editor/partials/']
+  // }));
+
+  app.use(function (req, res, next) { 
+    if (req.path.indexOf("editor") > -1) { 
+      app.engine('handlebars', exphbs({
+        layoutsDir: config.root + '/themes/editor/layouts/',
+        defaultLayout: 'main',
+        partialsDir: [config.root + '/themes/editor/partials/']
+      }));
+    } else { 
+      app.engine('handlebars', exphbs({
+        layoutsDir: config.root + '/themes/'+config.theme+'/layouts/',
+        defaultLayout: 'main',
+        partialsDir: [config.root + '/themes/'+config.theme+'/partials/']
+      }));
+    }
+
+    next();
+  });
+
+  app.set('views', config.root + '/themes');
   app.set('view engine', 'handlebars');
 
   var env = process.env.NODE_ENV || 'development';
@@ -28,6 +46,7 @@ module.exports = function(app, config) {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
+
   app.use(cookieParser());
   app.use(compress());
   app.use(express.static(config.root + '/public'));

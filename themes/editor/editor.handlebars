@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  {{#if ENV_DEVELOPMENT}}
+    <script src="http://localhost:35729/livereload.js"></script>
+  {{/if}}
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-2">
+			{{> pages/list }}
+		</div>
+		<div class="col-sm-2">
+			{{> galleries/list }}
+		</div>
+		<div class="col-sm-2">
+			{{> artworks/list }}
+		</div>
+		<div class="col-sm-6">
+			<section class="editor">
+				<div id="editor">
+					{{#if page }}{{> pages/form }}{{/if }}
+					{{#if gallery }}{{> galleries/form }}{{/if }}
+					{{#if artwork }}{{> artworks/form }}{{/if }}
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<section class="dark sidebar">
+	G
+</section>
+
+  <script src="/components/jquery/dist/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="roowyca8sg8fjrx"></script>
+  <script src="/js/scripts.js"></script>
+  </body>
+</html>

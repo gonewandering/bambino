@@ -1,0 +1,37 @@
+<section id="pages" class="navigation">
+	<table class='table'>
+		<thead>
+			<tr>
+				<th>
+					Galleries
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#if page.galleries }}
+				{{#each page.galleries}}
+				<tr class="gallery-drop" data-galleryID="{{ this.id }}" >
+					<td>
+						<a class="drag-item" data-galleryID="{{ this.id }}" href="/editor/galleries/{{ this.id }}">{{ this.title }}</a>
+					</td>
+				</tr>
+				{{/each }}
+			{{else }}
+				{{#each galleries}}
+				<tr class="gallery-drop {{ this.class }}" data-galleryID="{{ this.id }}" >
+					<td>
+						<a class="drag-item" data-galleryid="{{ this.id }}" href="/editor/galleries/{{ this.id }}">{{ this.title }}</a>
+					</td>
+				</tr>
+				{{/each }}
+			{{/if }}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+					<a href="/editor/galleries">Add +</a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</section>

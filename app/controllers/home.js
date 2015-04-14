@@ -1,6 +1,7 @@
 var express = require('express'),
 router = express.Router(),
-db = require('../models');
+db = require('../models'),
+config = require('../../config/config.js');
 
 module.exports = function (app) {
 	app.use('/', router);
@@ -24,7 +25,10 @@ router.get('/:slug', function (req, res, next) {
 					res.render(page.template || 'index', page);
 				});
 			} else { 
-				res.render(page.template || 'index', page);
+				page.layout = false;
+
+				console.log(config.theme + page.template);
+				res.render(config.theme + page.template || 'index', page);
 			}
 		});
 		} else { 
@@ -47,9 +51,10 @@ router.get('/', function (req, res, next) {
 						page.galleries[i].artworks = artworks;
 						page.gallery = page.galleries[i];
 
-						res.render(page.template || 'index', page);
+						res.render(config.theme + page.template || 'index', page);
 					});
 				} else { 
+					page.layout = false;
 					res.render(page.template || 'index', page);
 				}
 			});

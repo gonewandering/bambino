@@ -1,0 +1,37 @@
+<section id="artworks" class="navigation">
+	<table class='table'>
+		<thead>
+			<tr>
+				<th>
+					Artworks
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#if gallery.artworks }}
+				{{#each gallery.artworks}}
+				<tr>
+					<td>
+						<a class="drag-item" data-artworkID="{{ this.id }}" href="/editor/artworks/{{ this.id }}">{{ this.title }}</a>
+					</td>
+				</tr>
+				{{/each }}
+			{{ else }}
+			{{#each artworks}}
+			<tr class="{{ this.class }}">
+				<td>
+					<a class="drag-item" data-artworkID="{{ this.id }}" href="/editor/artworks/{{ this.id }}">{{ this.title }}</a>
+				</td>
+			</tr>
+			{{/each }}
+			{{/if }}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+					<a href="/editor/artworks">Add +</a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</section>

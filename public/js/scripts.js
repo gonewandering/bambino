@@ -17,11 +17,17 @@ jQuery(document).ready(function ($) {
 			$(".selected-image").attr("src", lnk);
 			$(".selected-image").removeClass("hidden");
 			$(".dropbox-button").addClass("hidden");
+
+			return true;
 		}
 	};
 
-	var button = Dropbox.createChooseButton(options);
-	$('.dropbox').append(button);
+	$(".dropbox-button").on("click", function () { 
+		Dropbox.choose(options);
+	});
+
+	// var button = Dropbox.createChooseButton(options);
+	// $('.dropbox').append(button);
 
 	// Draggable
     $( ".drag-item" ).draggable({ 
