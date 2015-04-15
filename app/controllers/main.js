@@ -8,7 +8,7 @@ module.exports = function (app) {
 };
 
 router.get('/:slug', function (req, res, next) {
-	var i = req.params.gid || 0, options = {};
+	var i = req.query.gid || 0, options = {};
 
 	if (req.params.slug == "editor") { next(); return false; }
 	db.Page.findAll().success(function (pages) {
@@ -42,6 +42,10 @@ router.get('/:slug', function (req, res, next) {
 			}
 		});
 	});
+});
+
+router.get('/:slug/:gid', function (req, res, next) {
+	res.redirect('/' + req.params.slug + '?gid=' + req.params.gid);
 });
 
 router.get('/', function (req, res, next) {

@@ -6,3 +6,4 @@ themes/*
 .sass-cache
 data/*
 !data/bambino-development
+config/config.js

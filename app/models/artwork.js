@@ -9,6 +9,7 @@ module.exports = function (sequelize, DataTypes) {
 	display: DataTypes.STRING,
 	full: DataTypes.STRING,
   title: DataTypes.STRING,
+  description: DataTypes.TEXT,
   size: DataTypes.STRING,
   medium: DataTypes.STRING,
   created: DataTypes.DATE
