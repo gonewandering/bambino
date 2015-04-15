@@ -14,7 +14,7 @@ jQuery(document).ready(function ($) {
 			$("[name='display']").attr("value", display);
 			$("[name='full']").attr("value", files[0].link);
 
-			$(".selected-image").attr("src", lnk);
+			$(".selected-image").attr("src", display);
 			$(".selected-image").removeClass("hidden");
 			$(".dropbox-button").addClass("hidden");
 
@@ -22,12 +22,9 @@ jQuery(document).ready(function ($) {
 		}
 	};
 
-	$(".dropbox-button").on("click", function () { 
-		Dropbox.choose(options);
-	});
 
-	// var button = Dropbox.createChooseButton(options);
-	// $('.dropbox').append(button);
+	var button = Dropbox.createChooseButton(options);
+	$('.dropbox').append(button);
 
 	// Draggable
     $( ".drag-item" ).draggable({ 

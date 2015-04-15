@@ -15,8 +15,8 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function (models) {
-        models.Artwork.belongsToMany(models.Gallery, { through: models.GalleryArt });
-        models.Gallery.belongsToMany(models.Artwork, { through: models.GalleryArt });
+        models.Artwork.belongsToMany(models.Gallery, models.GalleryArt );
+        models.Gallery.belongsToMany(models.Artwork, models.GalleryArt );
       }
     }
   });

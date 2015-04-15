@@ -27,8 +27,7 @@ var getAll = function (callback) {
 
 router.get('/', function (req, res, next) {
     getAll(function (options) { 
-        options.layout = false;
-        res.render('editor/editor', options);
+        res.render('editor', options);
     });
 });
 
@@ -40,8 +39,7 @@ router.get('/pages', function (req, res, next) {
     getAll(function (options) { 
 
         options.page = { active: true };
-        options.layout = false;
-        res.render('editor/editor', options);
+        res.render('editor', options);
     });
 });
 
@@ -61,8 +59,7 @@ router.get('/pages/:id', function (req, res, next) {
 
             item.getGalleries().then(function(galleries) { 
                 options.page.galleries = galleries;
-                options.layout = false;
-                res.render('editor/editor', options);
+                res.render('editor', options);
             });
         });
     });
@@ -102,8 +99,7 @@ router.get('/galleries', function (req, res, next) {
     getAll(function (options) { 
 
         options.gallery = true;
-        options.layout = false;
-        res.render('editor/editor', options);
+        res.render('editor', options);
     });
 });
 
@@ -123,8 +119,7 @@ router.get('/galleries/:id', function (req, res, next) {
             item.getArtworks().then(function(artworks) { 
 
                 options.gallery.artworks = artworks;
-                options.layout = false;
-                res.render('editor/editor', options);
+                res.render('editor', options);
 
             });
         });
@@ -165,8 +160,7 @@ router.get('/artworks', function (req, res, next) {
     getAll(function (options) { 
 
         options.artwork = true;
-        options.layout = false;
-        res.render('editor/editor', options);
+        res.render('editor', options);
     });
 });
 
@@ -181,8 +175,7 @@ router.get('/artworks/:id', function (req, res, next) {
 
             options.artwork = item;
             options.active = 'gallery';
-            options.layout = false;
-            res.render('editor/editor', options);
+            res.render('editor', options);
 
         });
     });

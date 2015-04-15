@@ -21,17 +21,9 @@
 			<label for="title">Metadescription for Page</label>
 			<input class="form-control input-lg" type="text" name="meta" value="{{ page.meta }}" placeholder="I am an artist...">
 		</div>
-<!-- 		<div class="form-group">
-			<label for="title">Is this page Active?</label>
-			<input class="form-control input-lg" type="checkbox" checked="{{ page.active }}" value="{{ page.active }}" name="active">
-		</div>
-		<div class="form-group">
-			<label for="title">Is this a blog post?</label>
-			<input class="form-control input-lg" type="checkbox" checked="{{ page.post }}" value="{{ page.post }}" name="post">
-		</div> -->
 		<div class="form-group">
 			<label for="title">Page Content?</label>
-			<textarea name="content" class="form-control input-lg" value="{{ page.content }}" placholder="HTML Content for this page"></textarea>
+			<textarea rows="10" name="content" class="form-control input-lg" placeholder="HTML Content for this page">{{ page.content }}</textarea>
 		</div>
 		<input type="hidden" name="id" value="{{ page.id }}">
 		<button class="btn btn-lg btn-success btn-block">Add Page</button>

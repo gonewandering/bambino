@@ -22,18 +22,19 @@ module.exports = function(app, config) {
         defaultLayout: 'main',
         partialsDir: [config.root + '/themes/editor/partials/']
       }));
+      app.set('views', config.root + '/themes/editor');
     } else { 
       app.engine('handlebars', exphbs({
         layoutsDir: config.root + '/themes/'+config.theme+'/layouts/',
         defaultLayout: 'main',
         partialsDir: [config.root + '/themes/'+config.theme+'/partials/']
       }));
+      app.set('views', config.root + '/themes/' + config.theme);
     }
 
     next();
   });
 
-  app.set('views', config.root + '/themes');
   app.set('view engine', 'handlebars');
 
   var env = process.env.NODE_ENV || 'development';

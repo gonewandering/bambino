@@ -2,4 +2,7 @@ node_modules/
 themes/*
 !themes/editor
 !themes/error.handlebars
+!themes/bambino
 .sass-cache
+data/*
+!data/bambino-development
