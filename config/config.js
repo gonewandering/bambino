@@ -5,36 +5,39 @@ var path = require('path'),
 var config = {
   development: {
     root: rootPath,
-    theme: 'bark-bark/',
+    theme: 'bambino/',
     app: {
       name: 'bambino'
     },
     port: 3000,
-    db: 'sqlite://localhost/bambino-development',
-    storage: rootPath + '/data/bambino-development'
   },
 
   test: {
     root: rootPath,
-    theme: 'bark-bark/',
+    theme: 'bambino/',
     app: {
       name: 'bambino'
     },
-    port: 3000,
-    db: 'sqlite://localhost/bambino-test',
-    storage: rootPath + '/data/bambino-test'
+    port: 3000
   },
 
   production: {
     root: rootPath,
-    theme: 'bark-bark/',
+    theme: 'bambino/',
     app: {
       name: 'bambino'
     },
-    port: 3000,
-    db: 'sqlite://localhost/bambino-production',
-    storage: rootPath + 'data/bambino-production'
+    port: 3000
   }
 };
 
-module.exports = config[env];
+
+// This sets up the config object
+
+var conf = config[env];
+
+conf.db = conf.db || 'sqlite://localhost/' + conf.app.name + "-" + env;
+conf.storage = conf.root + '/data/' + conf.app.name + "-" + env;
+
+console.log(conf);
+module.exports = conf;

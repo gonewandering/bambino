@@ -5685,6 +5685,12 @@ section.sidebar {
 a {
   color: #00B7FF; }
 
+.dropbox-dropin-btn {
+  width: 100% !important;
+  border: none !important;
+  padding: 8px 10px 12px !important;
+  border-radius: 0 !important; }
+
 .navbar {
   margin-bottom: 0; }
 
