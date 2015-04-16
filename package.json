@@ -14,6 +14,7 @@
     "express": "~4.12.0",
     "express-handlebars": "~2.0.0",
     "express-session": "^1.11.1",
+    "express-sessions": "^1.0.5",
     "glob": "~5.0.3",
     "handlebars-layouts": "^1.1.0",
     "method-override": "~2.3.0",
