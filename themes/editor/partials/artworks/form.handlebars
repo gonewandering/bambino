@@ -26,6 +26,11 @@
 			<label>Medium</label>
 			<input class="input-lg form-control" placeholder="Artwork Medium" name="medium" value="{{ artwork.medium }}">
 		</div>
+		<div class="form-group">
+			<label>Description</label>
+			<textarea rows="12" class="input-sm form-control" placeholder="Description" name="description">{{ artwork.description }}</textarea>
+		</div>
+		<input type="hidden" name="id" value="{{ artwork.id }}">
 		<button class="btn btn-lg btn-block btn-success">Add Work</button>
 	</form>
 </div>

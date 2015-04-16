@@ -1,0 +1,27 @@
+<section id="pages" class="navigation">
+	<table class='table'>
+		<thead>
+			<tr>
+				<th>
+					Users
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each users}}
+			<tr class="user-drop {{ this.class }}" data-userID="{{ this.id }}">
+				<td>
+					<a href="/editor/users/{{ this.id }}">{{ this.name }}</a>
+				</td>
+			</tr>
+			{{/each }}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+					<a href="/editor/user">Add +</a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</section>

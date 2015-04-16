@@ -1,7 +1,14 @@
 var express = require('express'),
 router = express.Router(),
 db = require('../models'),
-_ = require('underscore');
+_ = require('underscore'),
+config = require('../../config/config.js'),
+async = require('async'),
+https = require('https'),
+fs = require('fs'),
+mkdirp = require('mkdirp'),
+md5 = require('MD5'),
+session = require('express-sessions');
 
 module.exports = function (app) {
     app.use('/editor', router);
@@ -32,6 +39,97 @@ router.get('/', function (req, res, next) {
 });
 
 
+// Setup users
+
+router.get('/login', function (req, res, next) {
+    db.User.findAll().then(function (users) { 
+        if (users.length == 0) { var newu = true; }
+        res.render('login', {next: req.query.next, init: newu });
+    });
+});
+
+router.post('/login', function (req, res, next) {
+    db.User.findAll().then(function (users) { 
+        if (users.length == 0) { 
+            req.body.password = md5(req.body.password);
+
+            db.User.create(req.body).then(function (user) { 
+                req.session.user = user;
+                if (req.body.next) { 
+                    res.redirect(req.body.next);
+                } else { 
+                    res.redirect('/editor/');
+                }
+            });            
+        } else { 
+            db.User.findOne({where: { email: req.body.email }}).then(function (user) { 
+                if (user.password == md5(req.body.password)) { 
+                    req.session.user = user;
+                    if (req.body.next) { 
+                        res.redirect(req.body.next);
+                    } else { 
+                        res.redirect('/editor/');
+                    }
+                } else { 
+                    res.redirect('/login');
+                }
+            });
+        }
+    });
+});
+
+router.get('/logout', function (req, res, next) { 
+    req.session.user = null;
+    res.redirect('/editor/login');
+});
+
+router.get('/users', function (req, res, next) {
+    db.User.findAll().success(function (users) { 
+        console.log(users);
+        res.render('users', { users: users });
+    });
+});
+
+router.get('/users/:id', function (req, res, next) {
+    db.User.findAll().success(function (users) { 
+        db.User.find(req.params.id).success(function (user) { 
+            res.render('users', { user: user, users: users });
+        });
+    });
+});
+
+router.post('/users', function (req, res, next) {
+
+    if (req.body.id > 0) { 
+        var id = req.body.id;
+        delete req.body.id;
+
+        db.User.update(req.body, { where: { id: id }}).then(function (item) { 
+            res.redirect('/editor/users/' + id);
+        });
+
+    } else { 
+        req.body.password = md5(req.body.password);
+        db.User.create(req.body).then(function (item) { 
+            res.redirect('/editor/users/' + item.id);
+        });
+    }
+});
+
+router.post('/users/password', function (req, res, next) {
+
+    if (req.body.id > 0) { 
+        var id = req.body.id;
+        delete req.body.id;
+
+        req.body.password = md5(req.body.password);
+        db.User.update(req.body, { where: { id: id }}).then(function (item) { 
+            res.redirect('/editor/users/' + id);
+        });
+    } else { 
+        res.redirect('/editor/users/' + id);
+    }
+});
 
 // Setup page
 
@@ -169,8 +267,10 @@ router.get('/artworks/:id', function (req, res, next) {
 
         db.Artwork.find(req.params.id).success(function (item) {
             options.artworks = _.map(options.artworks, function (d) { 
-               d.class = d.id == item.id ? 'active' : '';
-               return d;
+                if (item && d.id && item.id) { 
+                    d.class = d.id == item.id ? 'active' : '';
+                    return d;
+                } else { return d; }
             });
 
             options.artwork = item;
@@ -187,13 +287,62 @@ router.post('/artworks', function (req, res, next) {
         var id = req.body.id;
         delete req.body.id;
 
-        db.Artwork.update(req.body, { where: { id: id }}).then(function (item) { 
-            res.redirect('/editor/artworks/' + id);
+        db.Artwork.update(req.body, { where: { id: Number(id) }}).then(function (item) { 
+            if (req.body.square.indexOf("dropbox") > -1) { 
+                req.body.id = id;
+                getArt(req.body, function () { 
+                    res.redirect('/editor/artworks/' + id);
+                })
+            } else { 
+                res.redirect('/editor/artworks/' + id);
+            }
         });
 
     } else { 
         db.Artwork.create(req.body).then(function (item) { 
-            res.redirect('/editor/artworks/' + item.id);
+            if (req.body.square.indexOf("dropbox")) { 
+                getArt(item, function () { 
+                    res.redirect('/editor/artworks/' + id);
+                });
+            } else { 
+                res.redirect('/editor/artworks/' + id);
+            }
         });
     }
 });
+
+var getArt = function (item, cb) { 
+    var basePath = config.root + "/uploads/" + config.app.name;
+
+    var imagePaths = {
+        square: "/artwork/" + item.id +"/square.jpg",
+        display: "/artwork/" + item.id +"/display.jpg",
+        full: "/artwork/" + item.id +"/full.jpg"
+    };
+
+    mkdirp(basePath + "/artwork/" + item.id + "/",  function (err) { 
+        async.parallel([function (callback) { 
+            var file = fs.createWriteStream(basePath + imagePaths.square);
+            var request = https.get(item.square, function(response) {
+              response.pipe(file);
+              callback();
+            });   
+        }, function (callback) { 
+           var file = fs.createWriteStream(basePath + imagePaths.display);
+           var request = https.get(item.display, function(response) {
+              response.pipe(file);
+              callback();
+            });  
+        }, function (callback) { 
+           var file = fs.createWriteStream(basePath + imagePaths.full);
+           var request = https.get(item.full, function(response) {
+              response.pipe(file);
+              callback();
+            }); 
+        }], function () { 
+            db.Artwork.update(imagePaths, { where: { id: item.id } }).success(function () { 
+                cb();
+            });
+        }); 
+    }); 
+}
