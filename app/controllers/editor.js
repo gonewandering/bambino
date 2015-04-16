@@ -6,7 +6,9 @@ config = require('../../config/config.js'),
 async = require('async'),
 https = require('https'),
 fs = require('fs'),
-mkdirp = require('mkdirp');
+mkdirp = require('mkdirp'),
+md5 = require('MD5'),
+session = require('express-sessions');
 
 module.exports = function (app) {
     app.use('/editor', router);
@@ -37,6 +39,97 @@ router.get('/', function (req, res, next) {
 });
 
 
+// Setup users
+
+router.get('/login', function (req, res, next) {
+    db.User.findAll().then(function (users) { 
+        if (users.length == 0) { var newu = true; }
+        res.render('login', {next: req.query.next, init: newu });
+    });
+});
+
+router.post('/login', function (req, res, next) {
+    db.User.findAll().then(function (users) { 
+        if (users.length == 0) { 
+            req.body.password = md5(req.body.password);
+
+            db.User.create(req.body).then(function (user) { 
+                req.session.user = user;
+                if (req.body.next) { 
+                    res.redirect(req.body.next);
+                } else { 
+                    res.redirect('/editor/');
+                }
+            });            
+        } else { 
+            db.User.findOne({where: { email: req.body.email }}).then(function (user) { 
+                if (user.password == md5(req.body.password)) { 
+                    req.session.user = user;
+                    if (req.body.next) { 
+                        res.redirect(req.body.next);
+                    } else { 
+                        res.redirect('/editor/');
+                    }
+                } else { 
+                    res.redirect('/login');
+                }
+            });
+        }
+    });
+});
+
+router.get('/logout', function (req, res, next) { 
+    req.session.user = null;
+    res.redirect('/editor/login');
+});
+
+router.get('/users', function (req, res, next) {
+    db.User.findAll().success(function (users) { 
+        console.log(users);
+        res.render('users', { users: users });
+    });
+});
+
+router.get('/users/:id', function (req, res, next) {
+    db.User.findAll().success(function (users) { 
+        db.User.find(req.params.id).success(function (user) { 
+            res.render('users', { user: user, users: users });
+        });
+    });
+});
+
+router.post('/users', function (req, res, next) {
+
+    if (req.body.id > 0) { 
+        var id = req.body.id;
+        delete req.body.id;
+
+        db.User.update(req.body, { where: { id: id }}).then(function (item) { 
+            res.redirect('/editor/users/' + id);
+        });
+
+    } else { 
+        req.body.password = md5(req.body.password);
+        db.User.create(req.body).then(function (item) { 
+            res.redirect('/editor/users/' + item.id);
+        });
+    }
+});
+
+router.post('/users/password', function (req, res, next) {
+
+    if (req.body.id > 0) { 
+        var id = req.body.id;
+        delete req.body.id;
+
+        req.body.password = md5(req.body.password);
+        db.User.update(req.body, { where: { id: id }}).then(function (item) { 
+            res.redirect('/editor/users/' + id);
+        });
+    } else { 
+        res.redirect('/editor/users/' + id);
+    }
+});
 
 // Setup page
 

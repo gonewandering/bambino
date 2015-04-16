@@ -5685,10 +5685,15 @@ section.sidebar {
   section.sidebar h1 {
     color: white;
     text-align: center;
-    font-size: 30px;
     margin: 0;
     padding: 0;
-    padding-top: 12px; }
+    font-size: 18px;
+    padding-top: 24px; }
+    section.sidebar h1 a {
+      color: #d4d4d4; }
+  section.sidebar h1.logo {
+    padding-top: 12px;
+    font-size: 30px; }
 
 a {
   color: #00B7FF; }
