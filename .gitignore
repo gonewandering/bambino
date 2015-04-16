@@ -8,3 +8,4 @@ data/*
 !data/bambino-development
 config/config.js
 uploads/*
+data/*
