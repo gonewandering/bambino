@@ -1,7 +1,12 @@
 var express = require('express'),
 router = express.Router(),
 db = require('../models'),
-_ = require('underscore');
+_ = require('underscore'),
+config = require('../../config/config.js'),
+async = require('async'),
+https = require('https'),
+fs = require('fs'),
+mkdirp = require('mkdirp');
 
 module.exports = function (app) {
     app.use('/editor', router);
@@ -169,8 +174,10 @@ router.get('/artworks/:id', function (req, res, next) {
 
         db.Artwork.find(req.params.id).success(function (item) {
             options.artworks = _.map(options.artworks, function (d) { 
-               d.class = d.id == item.id ? 'active' : '';
-               return d;
+                if (item && d.id && item.id) { 
+                    d.class = d.id == item.id ? 'active' : '';
+                    return d;
+                } else { return d; }
             });
 
             options.artwork = item;
@@ -187,13 +194,62 @@ router.post('/artworks', function (req, res, next) {
         var id = req.body.id;
         delete req.body.id;
 
-        db.Artwork.update(req.body, { where: { id: id }}).then(function (item) { 
-            res.redirect('/editor/artworks/' + id);
+        db.Artwork.update(req.body, { where: { id: Number(id) }}).then(function (item) { 
+            if (req.body.square.indexOf("dropbox") > -1) { 
+                req.body.id = id;
+                getArt(req.body, function () { 
+                    res.redirect('/editor/artworks/' + id);
+                })
+            } else { 
+                res.redirect('/editor/artworks/' + id);
+            }
         });
 
     } else { 
         db.Artwork.create(req.body).then(function (item) { 
-            res.redirect('/editor/artworks/' + item.id);
+            if (req.body.square.indexOf("dropbox")) { 
+                getArt(item, function () { 
+                    res.redirect('/editor/artworks/' + id);
+                });
+            } else { 
+                res.redirect('/editor/artworks/' + id);
+            }
         });
     }
 });
+
+var getArt = function (item, cb) { 
+    var basePath = config.root + "/uploads/" + config.app.name;
+
+    var imagePaths = {
+        square: "/artwork/" + item.id +"/square.jpg",
+        display: "/artwork/" + item.id +"/display.jpg",
+        full: "/artwork/" + item.id +"/full.jpg"
+    };
+
+    mkdirp(basePath + "/artwork/" + item.id + "/",  function (err) { 
+        async.parallel([function (callback) { 
+            var file = fs.createWriteStream(basePath + imagePaths.square);
+            var request = https.get(item.square, function(response) {
+              response.pipe(file);
+              callback();
+            });   
+        }, function (callback) { 
+           var file = fs.createWriteStream(basePath + imagePaths.display);
+           var request = https.get(item.display, function(response) {
+              response.pipe(file);
+              callback();
+            });  
+        }, function (callback) { 
+           var file = fs.createWriteStream(basePath + imagePaths.full);
+           var request = https.get(item.full, function(response) {
+              response.pipe(file);
+              callback();
+            }); 
+        }], function () { 
+            db.Artwork.update(imagePaths, { where: { id: item.id } }).success(function () { 
+                cb();
+            });
+        }); 
+    }); 
+}

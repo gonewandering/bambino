@@ -5650,11 +5650,11 @@ section {
     border-left: none; }
   section.editor {
     background: #7b7b7b;
-    box-shadow: 0 0 50px rgba(85, 85, 85, 0.7); }
+    box-shadow: 0 0 2px rgba(85, 85, 85, 0.7); }
   section.navigation {
     background: #7b7b7b;
-    border-right: none;
-    box-shadow: 0 0 50px rgba(85, 85, 85, 0.7); }
+    border-left: 1px solid rgba(85, 85, 85, 0.6);
+    box-shadow: 0 0 2px rgba(85, 85, 85, 0.7); }
     section.navigation thead {
       background: #6e6e6e;
       color: #EEE; }
@@ -5671,8 +5671,7 @@ section {
     section.navigation tfoot a {
       color: white; }
     section.navigation tfoot td {
-      border-top: none;
-      border-top: solid 2px #626262; }
+      border-top: none; }
 
 section.sidebar {
   position: fixed;
@@ -5680,7 +5679,16 @@ section.sidebar {
   left: 0;
   width: 50px;
   height: 100vh;
+  padding: 0;
+  border-right: none;
   background: #555555; }
+  section.sidebar h1 {
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    padding-top: 12px; }
 
 a {
   color: #00B7FF; }
@@ -5688,8 +5696,9 @@ a {
 .dropbox-dropin-btn {
   width: 100% !important;
   border: none !important;
-  padding: 8px 10px 12px !important;
-  border-radius: 0 !important; }
+  padding: 8px 0px 12px  0px !important;
+  border-radius: 0 !important;
+  text-align: center; }
 
 .navbar {
   margin-bottom: 0; }

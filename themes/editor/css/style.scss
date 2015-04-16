@@ -21,13 +21,13 @@ section {
 
 	&.editor { 
 		background: darken($gray, 45);
-		box-shadow: 0 0 50px rgba(darken($gray, 60), .7);
+		box-shadow: 0 0 2px rgba(darken($gray, 60), .7);
 	}
 
 	&.navigation { 
 		background: darken($gray, 45);
-		border-right: none;
-		box-shadow: 0 0 50px rgba(darken($gray, 60), .7);
+		border-left: 1px solid rgba(darken($gray, 60), .6);
+		box-shadow: 0 0 2px rgba(darken($gray, 60), .7);
 
 		thead { 
 			background: darken($gray, 50);
@@ -64,7 +64,6 @@ section {
 
 			td { 
 				border-top: none;
-				border-top: solid 2px darken($gray, 55);
 			}
 		}
 	}
@@ -76,7 +75,17 @@ section.sidebar {
 	left: 0;
 	width: 50px;
 	height: 100vh;
+	padding: 0;
+	border-right: none;
 	background: darken($gray, 60);
+	h1 { 
+		color: white;
+		text-align: center;
+		font-size: 30px;
+		margin: 0;
+		padding: 0;
+		padding-top: 12px;
+	}
 }
 
 a {
@@ -86,8 +95,9 @@ a {
 .dropbox-dropin-btn { 
   width: 100% !important;
   border: none !important;
-  padding: 8px 10px 12px !important;
+  padding: 8px 0px 12px  0px !important;
   border-radius: 0 !important;
+  text-align: center;
 }
 
 .navbar { 
