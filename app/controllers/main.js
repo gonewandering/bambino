@@ -1,6 +1,7 @@
 var express = require('express'),
 router = express.Router(),
 db = require('../models'),
+_ = require('underscore'),
 config = require('../../config/config.js');
 
 module.exports = function (app) {
@@ -8,38 +9,22 @@ module.exports = function (app) {
 };
 
 router.get('/:slug', function (req, res, next) {
-	var i = req.query.gid || 0, options = {};
+	var i = req.query.gid, options = {};
 
 	if (req.params.slug == "editor") { next(); return false; }
 	db.Page.findAll().success(function (pages) {
 
 		options.pages = pages;
 
-		db.Page.findOne({where: {'slug': req.params.slug}}).success(function (page) {
-			
-			options.page = page;
-			
-			if (page) {
-				page.getGalleries().then(function (galleries) {
-					if (galleries && galleries.length > 0) { 
-						
-						options.galleries = galleries;
+		db.Page.findOne({include: [{all: true, nested: true}], where: {'slug': req.params.slug}}).success(function (page) {
+			options.Page = JSON.parse(JSON.stringify(page));
+			options.Page.Gallery = _.filter(options.Page.Galleries, function(d){
+				return d.id == i;
+			});
 
-						galleries[i].getArtworks().then(function (artworks) { 
-							options.galleries[i].artworks = artworks;
-							
-							options.gallery = galleries[i];
+			options.Page.Gallery = options.Page.Gallery[0] || false;
 
-							res.render(page.template || 'index', options);
-						});
-					} else { 
-						options.pages = pages;
-						res.render(page.template || 'index', options);
-					}
-				});
-			} else { 
-				next(); return false;
-			}
+			res.render(page.template || 'index', options);
 		});
 	});
 });
