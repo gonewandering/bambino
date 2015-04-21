@@ -5638,7 +5638,7 @@ button.close {
 body {
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: #959595;
+  background: #7b7b7b;
   margin-left: 50px;
   font-weight: 300; }
 
@@ -5738,5 +5738,12 @@ a {
       border-radius: 5px; }
   #editor button {
     margin: 30px 0; }
+
+.login {
+  margin-top: 150px; }
+  .login h3 {
+    color: #aeaeae;
+    text-transform: uppercase;
+    text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

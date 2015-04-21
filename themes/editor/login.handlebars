@@ -1,7 +1,8 @@
-<div class="container">
+<div id="editor" class="container login">
 	<div class="row">
 		{{# if init }}
-		<div class="col-sm-4 col-sm-offset-4" style="margin-top: 100px">
+		<div class="col-sm-4 col-sm-offset-4">
+			<div class="login-wrapper">
 			<h3>Create Admin User</h3>
 			<form action="" method="post">
 				<div class="form-group">
@@ -14,22 +15,27 @@
 					<input class="form-control input-lg" type="password" name="password" value="{{ user.password }}" placeholder="Password.">
 				</div>
 				<input type="hidden" name="next" value="{{ next }}">
-				<button class="btn btn-lg btn-success btn-block">Create</button>
+				<button class="btn btn-lg btn-info btn-block">Create</button>
 			</form>
+			</div>
 		</div>
 		{{else }}
-		<div class="col-sm-4 col-sm-offset-4" style="margin-top: 100px">
-			<h3>Login to Bambino</h3>
-			<form action="" method="post">
-				<div class="form-group">
-					<input class="form-control input-lg" type="text" name="email" value="{{ user.email }}" placeholder="Email.">
-				</div>
-				<div class="form-group">
-					<input class="form-control input-lg" type="password" name="password" value="{{ user.password }}" placeholder="Password.">
-				</div>
-				<input type="hidden" name="next" value="{{ next }}">
-				<button class="btn btn-lg btn-success btn-block">Login</button>
-			</form>
+		<div class="col-sm-4 col-sm-offset-4">
+			<div class="login-wrapper">
+				<h3 class="center">Welcome to Bambino</h3>
+				<form action="" method="post">
+					<div class="form-group">
+						<label>Email Address</label>
+						<input class="form-control input-lg" type="text" name="email" value="{{ user.email }}" placeholder="wiley@acme.com">
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<input class="form-control input-lg" type="password" name="password" value="{{ user.password }}" placeholder="Password.">
+					</div>
+					<input type="hidden" name="next" value="{{ next }}">
+					<button class="btn btn-lg btn-info btn-block">Login</button>
+				</form>
+			</div>
 		</div>
 		{{/if }}
 	</div>

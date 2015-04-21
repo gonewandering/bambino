@@ -12,15 +12,15 @@ var session = require('express-session');
 
 module.exports = function(app, config) {
 
-  app.use(function (req, res, next) { 
-    if (req.path.indexOf("editor") > -1) { 
+  app.use(function (req, res, next) {
+    if (req.path.indexOf("editor") > -1) {
       app.engine('handlebars', exphbs({
         layoutsDir: config.root + '/themes/editor/layouts/',
         defaultLayout: 'main',
         partialsDir: [config.root + '/themes/editor/partials/']
       }));
       app.set('views', config.root + '/themes/editor');
-    } else { 
+    } else {
       app.engine('handlebars', exphbs({
         layoutsDir: config.root + '/themes/'+config.theme+'/layouts/',
         defaultLayout: 'main',
@@ -32,11 +32,11 @@ module.exports = function(app, config) {
     next();
   });
 
-  app.use(session({ 
-    resave: true, 
-    cookie: { httpOnly: false }, 
-    saveUninitialized: false, 
-    secret: 'There are cold things done in the midnight sun' 
+  app.use(session({
+    resave: true,
+    cookie: { httpOnly: false },
+    saveUninitialized: false,
+    secret: 'There are cold things done in the midnight sun'
   }));
 
   app.set('view engine', 'handlebars');
@@ -58,17 +58,17 @@ module.exports = function(app, config) {
   app.use(express.static(config.root + '/uploads/' + config.app.name));
   app.use(methodOverride());
 
-  app.use(function (req, res, next) { 
-    if (req.path.indexOf("editor") > -1 && req.path.indexOf("editor/login") == -1) { 
-        if (req.session && req.session.user) { 
-          next();
-        } else { 
-          res.redirect("/editor/login");
-        }
-    } else { 
-      next();
-    }
-  });
+  // app.use(function (req, res, next) { 
+  //   if (req.path.indexOf("editor") > -1 && req.path.indexOf("editor/login") == -1) {
+  //       if (req.session && req.session.user) {
+  //         next();
+  //       } else {
+  //         res.redirect("/editor/login");
+  //       }
+  //   } else {
+  //     next();
+  //   }
+  // });
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
@@ -80,7 +80,7 @@ module.exports = function(app, config) {
     err.status = 404;
     next(err);
   });
-  
+
   if(app.get('env') === 'development'){
     app.use(function (err, req, res, next) {
       res.status(err.status || 500);

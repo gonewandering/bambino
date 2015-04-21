@@ -5,9 +5,9 @@
 		<div class="title">Add Artwork</div>
 	{{/if }}
 	<div class="artwork">
-		<img class="selected-image" src="{{ artwork.display }}" style="width: 300px" />
+		<img class="selected-image" src="{{ artwork.display }}" style="height: 300px" />
 	</div>
-	<form action="/editor/artworks" method="POST">
+	<form action="/editor/pages/{{ page.id }}/galleries/{{ gallery.id }}/artworks" method="POST">
 		<div class="form-group dropbox">
 			<label>Image</label><br />
 			<input type="hidden" name="full" value="{{ artwork.full }}" class="upload" />
@@ -31,6 +31,6 @@
 			<textarea rows="12" class="input-sm form-control" placeholder="Description" name="description">{{ artwork.description }}</textarea>
 		</div>
 		<input type="hidden" name="id" value="{{ artwork.id }}">
-		<button class="btn btn-lg btn-block btn-success">Add Work</button>
+		<button class="btn btn-lg btn-block btn-info">Add/Update Work</button>
 	</form>
 </div>

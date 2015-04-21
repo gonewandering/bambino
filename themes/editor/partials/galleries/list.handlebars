@@ -8,19 +8,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#if page.galleries }}
-				{{#each page.galleries}}
-				<tr class="gallery-drop" data-galleryID="{{ this.id }}" >
-					<td>
-						<a class="drag-item" data-galleryID="{{ this.id }}" href="/editor/galleries/{{ this.id }}">{{ this.title }}</a>
-					</td>
-				</tr>
-				{{/each }}
-			{{else }}
-				{{#each galleries}}
+			{{#if page.Galleries }}
+				{{#each page.Galleries}}
 				<tr class="gallery-drop {{ this.class }}" data-galleryID="{{ this.id }}" >
 					<td>
-						<a class="drag-item" data-galleryid="{{ this.id }}" href="/editor/galleries/{{ this.id }}">{{ this.title }}</a>
+						<div class="pull-right label label-info">{{ this.Artworks.length }}</div>
+						<a class="drag-item" data-galleryID="{{ this.id }}" href="/editor/pages/{{ ../page.id }}/galleries/{{ this.id }}">{{ this.title }}</a>
 					</td>
 				</tr>
 				{{/each }}
@@ -29,7 +22,7 @@
 		<tfoot>
 			<tr>
 				<td>
-					<a href="/editor/galleries">Add +</a>
+					<a href="/editor/pages/{{ page.id }}/galleries">Add +</a>
 				</td>
 			</tr>
 		</tfoot>

@@ -11,6 +11,7 @@
 			{{#each pages}}
 			<tr class="page-drop {{ this.class }}" data-pageID="{{ this.id }}">
 				<td>
+					<div class="pull-right label label-info">{{ this.Galleries.length }}</div>
 					<a href="/editor/pages/{{ this.id }}">{{ this.title }}</a>
 				</td>
 			</tr>

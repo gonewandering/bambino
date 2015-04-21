@@ -8,28 +8,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#if gallery.artworks }}
-				{{#each gallery.artworks}}
-				<tr>
+			{{#if gallery.Artworks }}
+				{{#each gallery.Artworks}}
+				<tr class="{{ this.class }}">
 					<td>
-						<a class="drag-item" data-artworkID="{{ this.id }}" href="/editor/artworks/{{ this.id }}">{{ this.title }}</a>
+						<a class="drag-item" data-artworkID="{{ this.id }}" href="/editor/pages/{{ ../page.id }}/galleries/{{ ../gallery.id }}/artworks/{{ this.id }}">
+							<img src="{{ this.square }}" style="max-width: 18px; border-radius: 15px"> {{ this.title }}
+						</a>
 					</td>
 				</tr>
 				{{/each }}
-			{{ else }}
-			{{#each artworks}}
-			<tr class="{{ this.class }}">
-				<td>
-					<a class="drag-item" data-artworkID="{{ this.id }}" href="/editor/artworks/{{ this.id }}">{{ this.title }}</a>
-				</td>
-			</tr>
-			{{/each }}
 			{{/if }}
 		</tbody>
 		<tfoot>
 			<tr>
 				<td>
-					<a href="/editor/artworks">Add +</a>
+					<a href="/editor/pages/{{ page.id }}/galleries/{{ gallery.id }}/artworks">Add +</a>
 				</td>
 			</tr>
 		</tfoot>

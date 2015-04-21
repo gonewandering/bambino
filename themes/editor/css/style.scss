@@ -5,72 +5,72 @@ $gray: #EEE;
 body {
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: darken($gray, 35);
+  background: darken($gray, 45);
   margin-left: 50px;
   font-weight: 300;
 }
 
-section { 
+section {
 	border-right: solid 1px darken($gray, 10);
 	height: 100vh;
 	overflow-y: scroll;
 
-	&:first-child { 
+	&:first-child {
 		border-left: none;
 	}
 
-	&.editor { 
+	&.editor {
 		background: darken($gray, 45);
 		box-shadow: 0 0 2px rgba(darken($gray, 60), .7);
 	}
 
-	&.navigation { 
+	&.navigation {
 		background: darken($gray, 45);
 		border-left: 1px solid rgba(darken($gray, 60), .6);
 		box-shadow: 0 0 2px rgba(darken($gray, 60), .7);
 
-		thead { 
+		thead {
 			background: darken($gray, 50);
 			color: $gray;
 
-			th { 
+			th {
 				border-bottom: none;
 			}
 		}
 
-		tbody { 
-			a { 
+		tbody {
+			a {
 				color: darken($gray, 20);
 			}
 
-			tr { 
-				&.active { 
+			tr {
+				&.active {
 					background: darken($gray, 40);
 
-					td { 
+					td {
 						background: transparent;
 					}
 				}
-				td { 
+				td {
 					border: none;
 				}
 			}
 		}
 
-		tfoot { 
-			a { 
+		tfoot {
+			a {
 				color: white;
 			}
 
-			td { 
+			td {
 				border-top: none;
 			}
 		}
 	}
 }
 
-section.sidebar { 
-	position: fixed; 
+section.sidebar {
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 50px;
@@ -78,19 +78,19 @@ section.sidebar {
 	padding: 0;
 	border-right: none;
 	background: darken($gray, 60);
-	h1 { 
+	h1 {
 		color: white;
 		text-align: center;
 		margin: 0;
 		padding: 0;
 		font-size: 18px;
 		padding-top: 24px;
-		a { 
+		a {
 			color: darken($gray, 10);
 		}
 	}
 
-	h1.logo { 
+	h1.logo {
 		padding-top: 12px;
 		font-size: 30px;
 	}
@@ -100,7 +100,7 @@ a {
   color: #00B7FF;
 }
 
-.dropbox-dropin-btn { 
+.dropbox-dropin-btn {
   width: 100% !important;
   border: none !important;
   padding: 8px 0px 12px  0px !important;
@@ -108,34 +108,34 @@ a {
   text-align: center;
 }
 
-.navbar { 
+.navbar {
 	margin-bottom: 0;
 }
 
-#editor { 
+#editor {
 	padding: 0px;
 
-	form { 
+	form {
 		margin-top: 30px;
 	}
-	.title { 
+	.title {
 		background: darken($gray, 50);
 		color: white;
 		padding: 9px;
 		font-weight: 800;
 	}
 
-	input, textarea { 
+	input, textarea {
 		background: darken($gray, 40);
 		border-width: 0;
 		color: white;
 	}
 
-	.btn { 
+	.btn {
 		border-radius: 0;
 	}
 
-	label { 
+	label {
 		color: darken($gray, 15);
 		text-transform: uppercase;
 		font-weight: normal;
@@ -143,18 +143,26 @@ a {
 		font-size: .9em;
 	}
 
-	.artwork { 
+	.artwork {
 		text-align: center;
 		background: darken($gray, 55);
 		padding: 20px;
-		img { 
+		img {
 			display: inline;
 			border-radius: 5px;
 		}
 	}
 
-	button { 
+	button {
 		margin: 30px 0;
 	}
 }
-	
+
+.login {
+  margin-top: 150px;
+  h3 {
+    color: darken($gray, 25);
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
