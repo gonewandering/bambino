@@ -58,17 +58,17 @@ module.exports = function(app, config) {
   app.use(express.static(config.root + '/uploads/' + config.app.name));
   app.use(methodOverride());
 
-  // app.use(function (req, res, next) { 
-  //   if (req.path.indexOf("editor") > -1 && req.path.indexOf("editor/login") == -1) {
-  //       if (req.session && req.session.user) {
-  //         next();
-  //       } else {
-  //         res.redirect("/editor/login");
-  //       }
-  //   } else {
-  //     next();
-  //   }
-  // });
+  app.use(function (req, res, next) { 
+    if (req.path.indexOf("editor") > -1 && req.path.indexOf("editor/login") == -1) {
+        if (req.session && req.session.user) {
+          next();
+        } else {
+          res.redirect("/editor/login");
+        }
+    } else {
+      next();
+    }
+  });
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
