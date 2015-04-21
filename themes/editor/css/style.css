@@ -5667,7 +5667,10 @@ section {
       section.navigation tbody tr.active td {
         background: transparent; }
     section.navigation tbody tr td {
-      border: none; }
+      border: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
     section.navigation tfoot a {
       color: white; }
     section.navigation tfoot td {
