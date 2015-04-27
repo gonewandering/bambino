@@ -1,10 +1,10 @@
-jQuery(document).ready(function ($) { 
+jQuery(document).ready(function ($) {
 
 	// Dropbox Chooser
-	var options = { 
+	var options = {
 		linkType: 'direct',
 		extensions: ['.jpeg', '.jpg', '.png'],
-		success: function (files) { 
+		success: function (files) {
 			$(".upload").val(files[0].link);
 
 			var square = files[0].thumbnailLink.replace("=75", "=256").replace("=fit", "=crop");
@@ -22,30 +22,37 @@ jQuery(document).ready(function ($) {
 		}
 	};
 
-
 	var button = Dropbox.createChooseButton(options);
+
+	$('[data-show]').on('click', function () {
+		var show = $(this).data('show');
+		$(".tab").hide();
+		$(show).fadeIn();
+		return false;
+	});
+
 	$('.dropbox').append(button);
 
 	// Draggable
-    $( ".drag-item" ).draggable({ 
+    $( ".drag-item" ).draggable({
     	revert: true
     });
 
     $( ".gallery-drop" ).droppable({
-      hoverClass: 'active',
+      hoverClass: 'active-drag',
       drop: function( event, ui ) {
-		$.post("/editor/galleries/" + $(this).data("galleryid") + "/artworks/" + ui.draggable.data("artworkid"), function (res) { 
+		$.post("/editor/galleries/" + $(this).data("galleryid") + "/artworks/" + ui.draggable.data("artworkid"), function (res) {
 
 		});
 	  }
 	});
 
     $( ".page-drop" ).droppable({
-      hoverClass: 'active',
+      hoverClass: 'active-drag',
       drop: function( event, ui ) {
       	console.log(ui.draggable.data('galleryid'));
 
-		$.post("/editor/pages/" + $(this).data("pageid") + "/galleries/" + ui.draggable.data("galleryid"), function (res) { 
+		$.post("/editor/pages/" + $(this).data("pageid") + "/galleries/" + ui.draggable.data("galleryid"), function (res) {
 		});
 	  }
 	});

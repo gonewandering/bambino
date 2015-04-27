@@ -5,27 +5,27 @@ var path = require('path'),
 var config = {
   development: {
     root: rootPath,
-    theme: 'bark-bark/',
+    theme: 'emily/',
     app: {
-      name: 'bambino'
+      name: 'emilysilver'
     },
     port: 3000,
   },
 
   test: {
     root: rootPath,
-    theme: 'bark-bark/',
+    theme: 'emily/',
     app: {
-      name: 'bambino'
+      name: 'emilysilver'
     },
     port: 3000
   },
 
   production: {
     root: rootPath,
-    theme: 'bark-bark/',
+    theme: 'emily/',
     app: {
-      name: 'bambino'
+      name: 'emilysilver'
     },
     port: 3000
   }
@@ -39,5 +39,4 @@ var conf = config[env];
 conf.db = conf.db || 'sqlite://localhost/' + conf.app.name + "-" + env;
 conf.storage = conf.root + '/data/' + conf.app.name + "-" + env;
 
-console.log(conf);
 module.exports = conf;

@@ -12,40 +12,9 @@ var session = require('express-session');
 
 module.exports = function(app, config) {
 
-  app.use(function (req, res, next) {
-    if (req.path.indexOf("editor") > -1) {
-      app.engine('handlebars', exphbs({
-        layoutsDir: config.root + '/themes/editor/layouts/',
-        defaultLayout: 'main',
-        partialsDir: [config.root + '/themes/editor/partials/']
-      }));
-      app.set('views', config.root + '/themes/editor');
-    } else {
-      app.engine('handlebars', exphbs({
-        layoutsDir: config.root + '/themes/'+config.theme+'/layouts/',
-        defaultLayout: 'main',
-        partialsDir: [config.root + '/themes/'+config.theme+'/partials/']
-      }));
-      app.set('views', config.root + '/themes/' + config.theme);
-    }
-
-    next();
-  });
-
-  app.use(session({
-    resave: true,
-    cookie: { httpOnly: false },
-    saveUninitialized: false,
-    secret: 'There are cold things done in the midnight sun'
-  }));
-
-  app.set('view engine', 'handlebars');
-
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
-  app.locals.ENV_DEVELOPMENT = env == 'development';
 
-  // app.use(favicon(config.root + '/public/img/favicon.ico'));
   app.use(logger('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
@@ -54,26 +23,68 @@ module.exports = function(app, config) {
 
   app.use(cookieParser());
   app.use(compress());
-  app.use(express.static(config.root + '/themes'));
+
+  app.use(function (req, res, next) {
+    if (req.path.indexOf("editor") > -1) {
+
+      app.engine('handlebars', exphbs({
+        layoutsDir: config.root + '/themes/editor/layouts/',
+        defaultLayout: 'main',
+        partialsDir: [config.root + '/themes/editor/partials/']
+      }));
+
+      app.set('views', config.root + '/themes/editor');
+      app.use(express.static(config.root + '/themes/editor/'));
+
+    } else {
+
+      app.engine('handlebars', exphbs({
+        layoutsDir: config.root + '/themes/' + config.theme + '/layouts/',
+        defaultLayout: 'main',
+        partialsDir: [config.root + '/themes/' + config.theme + '/partials/']
+      }));
+
+      app.set('views', config.root + '/themes/' + config.theme);
+
+    }
+
+    next();
+  });
+
+  app.set('view engine', 'handlebars');
+
+  app.use(session({
+    resave: true,
+    cookie: { httpOnly: false },
+    saveUninitialized: false,
+    secret: 'There are strange things done in the midnight sun'
+  }));
+
+  // app.use(favicon(config.root + '/public/img/favicon.ico'));
+
   app.use(express.static(config.root + '/uploads/' + config.app.name));
+  app.use(express.static(config.root + '/themes'));
+
   app.use(methodOverride());
 
-  // app.use(function (req, res, next) {
-  //   if (req.path.indexOf("editor") > -1 && req.path.indexOf("editor/login") == -1) {
-  //       if (req.session && req.session.user) {
-  //         next();
-  //       } else {
-  //         res.redirect("/editor/login");
-  //       }
-  //   } else {
-  //     next();
-  //   }
-  // });
+  app.use(function (req, res, next) {
+    if (req.path.indexOf("editor") > -1 && req.path.indexOf("editor/login") == -1) {
+      if (req.session && req.session.user) {
+        next();
+      } else {
+        res.redirect("/editor/login");
+      }
+    } else {
+      next();
+    }
+  });
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
+
   controllers.forEach(function (controller) {
     require(controller)(app);
   });
+
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -81,24 +92,18 @@ module.exports = function(app, config) {
     next(err);
   });
 
-  if(app.get('env') === 'development'){
-    app.use(function (err, req, res, next) {
+  app.use(function (err, req, res, next) {
+    if (err.message.indexOf('Failed to lookup view') !== -1) {
+      return res.render('main', res.options);
+    } else {
       res.status(err.status || 500);
+
       res.render('error', {
         message: err.message,
         error: err,
         title: 'error'
       });
-    });
-  }
-
-  app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-      res.render('error', {
-        message: err.message,
-        error: {},
-        title: 'error'
-      });
+    }
   });
 
 };

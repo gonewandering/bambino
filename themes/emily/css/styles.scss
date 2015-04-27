@@ -1,0 +1,170 @@
+@import "bourbon/bourbon";
+
+body {
+  background: black;
+  color :white;
+  font-family: "Helvetica Nueue", "Helvetica";
+  background: black url(../img/background.jpg) top left no-repeat;
+}
+
+h1,h2,h3,h4,h5 {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+h1 .subtitle, h2 .subtitle {
+  font-size: .65em;
+  text-transform: capitalize;
+}
+
+a {
+  color: white;
+  @include transition(opacity 0.5s ease-in-out);
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+    opacity: .8;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.fade.eas {
+  opacity: 0;
+  @include transition(opacity 1.5s ease-in-out);
+
+  &.in {
+    opacity: 1;
+  }
+}
+
+a.fade {
+  opacity: 1;
+  @include transition(all 0.5s ease-in-out);
+
+  &:hover {
+    opacity: .8;
+    text-decoration: none;
+  }
+}
+
+.quote {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  font-style: italic;
+  color: #666;
+
+}
+
+.navigation-holder {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  max-width: 500px;
+  min-width: 500px;
+}
+.navigation {
+    a {
+      color: white;
+      text-transform: lowercase;
+      font-style: italic;
+    }
+    padding-bottom: 4px;
+}
+
+.article {
+  margin-top: 80px;
+  max-width: 900px;
+}
+
+.modal {
+  color: black;
+
+  h5 {
+    margin-top: 16px;
+  }
+
+  a {
+    color: rgba(black, .7);
+    &:hover {
+      color: black;
+    }
+  }
+
+  .modal-image {
+    background: black;
+    text-align: center;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.matrix {
+  width: 100%;
+  overflow: hidden;
+  .matrix-item {
+    width: 33.3333%;
+    float: left;
+    .img-wrapper {
+      padding: 5px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Home page styles
+
+.gallery {
+  padding-top: 110px;
+  .title {
+    padding-top: 170px;
+  }
+
+  &.home {
+    padding-top: 160px;
+  }
+}
+
+@media (max-width: 800px) {
+  .gallery {
+    padding-top: 20px;
+    .title {
+      padding-top: 10px;
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1000px) {
+  .gallery {
+    padding-top: 80px;
+    .title {
+      padding-top: 100px;
+      h1 {
+        font-size: 2.5em;
+      }
+    }
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .gallery {
+    padding-top: 120px;
+    .title {
+      padding-top: 140px;
+      h1 {
+        font-size: 2.5em;
+      }
+    }
+  }
+}

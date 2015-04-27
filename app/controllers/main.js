@@ -8,31 +8,48 @@ module.exports = function (app) {
 	app.use('/', router);
 };
 
-router.get('/:slug', function (req, res, next) {
-	var i = req.query.gid, options = {};
+var routes = {
+	get: function (req, res, next) {
+		var i = req.params.gid > 0 ? req.params.gid :  0,
+			options = {};
 
-	if (req.params.slug == "editor") { next(); return false; }
-	db.Page.findAll().success(function (pages) {
+		res.options = res.options || {};
 
-		options.pages = pages;
+		if (req.params.slug == 'editor') {
+			next(); return false;
+		} else if (!req.params.slug) {
+			req.params.slug = 'home';
+		}
 
-		db.Page.findOne({include: [{all: true, nested: true}], where: {'slug': req.params.slug}}).success(function (page) {
-			options.Page = JSON.parse(JSON.stringify(page));
-			options.Page.Gallery = _.filter(options.Page.Galleries, function(d){
-				return d.id == i;
+		db.Page.findAll().success(function (pages) {
+			db.Page.findOne({include: [{all: true, nested: true}], where: {'slug': req.params.slug}}).success(function (page) {
+
+				if (!page) { return next(); }
+
+				res.options.Pages = pages;
+				res.options.Page = JSON.parse(JSON.stringify(page));
+
+				res.options.Pages = _.map(res.options.Pages, function (d) {
+					if (d.id == res.options.Page.id) {
+						d.active = true;
+					} return d;
+				});
+
+				if (res.options.Page && res.options.Page.Galleries) {
+
+					res.options.Page.Gallery = _.filter(res.options.Page.Galleries, function(d){
+						return d.id == i;
+					});
+
+					res.options.Page.Gallery = res.options.Page.Gallery[0] || false;
+				}
+
+				res.render(res.options.Page.template || 'main', res.options);
 			});
-
-			options.Page.Gallery = options.Page.Gallery[0] || false;
-
-			res.render(page.template || 'index', options);
 		});
-	});
-});
+	},
+}
 
-router.get('/:slug/:gid', function (req, res, next) {
-	res.redirect('/' + req.params.slug + '?gid=' + req.params.gid);
-});
-
-router.get('/', function (req, res, next) {
-	res.redirect(config.home || '/home');
-});
+router.get('/:slug', routes.get);
+router.get('/:slug/:gid', routes.get);
+router.get('/', routes.get);

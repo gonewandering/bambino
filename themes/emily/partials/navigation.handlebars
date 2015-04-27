@@ -1,0 +1,7 @@
+<ul class="navigation list-unstyled list-inline">
+	{{#each Pages }}
+		{{#unless this.active }}
+		<li><a class="fade" href="/{{ this.slug }}">{{ this.title }}</a></li>
+		{{/unless }}
+	{{/each }}
+</ul>

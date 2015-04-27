@@ -4,7 +4,7 @@ var GalleryArt = require('../models/galleryArt');
 
 module.exports = function (sequelize, DataTypes) {
 
-  var Artwork = sequelize.define('Artwork', { 
+  var Artwork = sequelize.define('Artwork', {
 	square: DataTypes.STRING,
 	display: DataTypes.STRING,
 	full: DataTypes.STRING,

@@ -15,7 +15,11 @@
 		</div>
 		<div class="form-group">
 			<label for="title">Page Template</label>
-			<input class="form-control input-lg" type="text" name="template" value="{{ page.template }}" placeholder="general, etc.">
+			<select class="form-control input-lg" name="template" value="{{ page.template }}">
+				{{#each templates }}
+					<option value="{{ this.name }}">{{ this.name }}</option>
+				{{/each }}
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="title">Metadescription for Page</label>
