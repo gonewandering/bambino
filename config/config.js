@@ -9,7 +9,7 @@ var config = {
     app: {
       name: 'emilysilver'
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
   },
 
   test: {
@@ -18,7 +18,7 @@ var config = {
     app: {
       name: 'emilysilver'
     },
-    port: 3000
+    port: process.env.PORT || 3000
   },
 
   production: {
@@ -27,7 +27,7 @@ var config = {
     app: {
       name: 'emilysilver'
     },
-    port: 3000
+    port: process.env.PORT || 3000
   }
 };
 
