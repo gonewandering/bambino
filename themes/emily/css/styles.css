@@ -2,7 +2,8 @@ body {
   background: black;
   color: white;
   font-family: "Helvetica Nueue", "Helvetica";
-  background: black url(../img/background.jpg) top left no-repeat; }
+  background: black url(../img/background.jpg) top left no-repeat;
+  background-attachment: fixed; }
 
 h1, h2, h3, h4, h5 {
   font-weight: 400;
@@ -12,6 +13,11 @@ h1, h2, h3, h4, h5 {
 h1 .subtitle, h2 .subtitle {
   font-size: .65em;
   text-transform: capitalize; }
+
+p {
+  font-size: 1.1em;
+  line-height: 2.2em;
+  font-style: italic; }
 
 a {
   color: white;
@@ -28,9 +34,9 @@ a {
 
 .fade.eas {
   opacity: 0;
-  -webkit-transition: opacity 1.5s ease-in-out;
-  -moz-transition: opacity 1.5s ease-in-out;
-  transition: opacity 1.5s ease-in-out; }
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out; }
   .fade.eas.in {
     opacity: 1; }
 
@@ -44,14 +50,14 @@ a.fade {
     text-decoration: none; }
 
 .quote {
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   width: 100%;
   font-style: italic;
   color: #666; }
 
 .navigation-holder {
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 20px;
   max-width: 500px;
@@ -66,7 +72,13 @@ a.fade {
 
 .article {
   margin-top: 80px;
-  max-width: 900px; }
+  max-width: 900px;
+  padding-right: 13%;
+  margin-bottom: 80px; }
+  .article h1 {
+    border-bottom: solid 1px white;
+    padding-bottom: 10px;
+    margin-bottom: 20px; }
 
 .modal {
   color: black; }
@@ -76,6 +88,9 @@ a.fade {
     color: rgba(0, 0, 0, 0.7); }
     .modal a:hover {
       color: black; }
+  .modal p {
+    font-size: 1em;
+    line-height: 1.2em; }
   .modal .modal-image {
     background: black;
     text-align: center; }
@@ -100,13 +115,19 @@ a.fade {
     padding-top: 170px; }
   .gallery.home {
     padding-top: 160px; }
+  .gallery .matrix-item > a > img {
+    height: 110px;
+    width: 110px; }
 
 @media (max-width: 800px) {
   .gallery {
     padding-top: 20px; }
     .gallery .title {
       padding-top: 10px;
-      text-align: center; } }
+      text-align: center; }
+    .gallery .matrix-item img {
+      height: 110px;
+      width: 110px; } }
 @media (min-width: 800px) and (max-width: 1000px) {
   .gallery {
     padding-top: 80px; }

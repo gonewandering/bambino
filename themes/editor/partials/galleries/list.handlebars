@@ -10,7 +10,7 @@
 		<tbody>
 			{{#if page.Galleries }}
 				{{#each page.Galleries}}
-				<tr class="gallery-drop {{ this.class }}" data-galleryID="{{ this.id }}" >
+				<tr class="gallery-drop sortable {{ this.class }}" data-galleryID="{{ this.id }}" >
 					<td>
 						<div class="pull-right label label-info">{{ this.Artworks.length }}</div>
 						<a class="drag-item" data-galleryID="{{ this.id }}" href="/editor/pages/{{ ../page.id }}/galleries/{{ this.id }}">{{ this.title }}</a>

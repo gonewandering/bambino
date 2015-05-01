@@ -9,6 +9,7 @@ var compress = require('compression');
 var methodOverride = require('method-override');
 var exphbs  = require('express-handlebars');
 var session = require('express-session');
+var helpers = require('./helpers');
 
 module.exports = function(app, config) {
 
@@ -16,6 +17,7 @@ module.exports = function(app, config) {
   app.locals.ENV = env;
 
   app.use(logger('dev'));
+
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
     extended: true
@@ -27,22 +29,28 @@ module.exports = function(app, config) {
   app.use(function (req, res, next) {
     if (req.path.indexOf("editor") > -1) {
 
-      app.engine('handlebars', exphbs({
+      var hbs = exphbs.create({
         layoutsDir: config.root + '/themes/editor/layouts/',
         defaultLayout: 'main',
-        partialsDir: [config.root + '/themes/editor/partials/']
-      }));
+        partialsDir: [config.root + '/themes/editor/partials/'],
+        helpers: helpers
+      });
+
+      app.engine('handlebars', hbs.engine);
 
       app.set('views', config.root + '/themes/editor');
       app.use(express.static(config.root + '/themes/editor/'));
 
     } else {
 
-      app.engine('handlebars', exphbs({
+      var hbs = exphbs.create({
         layoutsDir: config.root + '/themes/' + config.theme + '/layouts/',
         defaultLayout: 'main',
-        partialsDir: [config.root + '/themes/' + config.theme + '/partials/']
-      }));
+        partialsDir: [config.root + '/themes/' + config.theme + '/partials/'],
+        helpers: helpers
+      })
+
+      app.engine('handlebars', hbs.engine);
 
       app.set('views', config.root + '/themes/' + config.theme);
 

@@ -10,7 +10,7 @@
 		<tbody>
 			{{#if gallery.Artworks }}
 				{{#each gallery.Artworks}}
-				<tr class="{{ this.class }}">
+				<tr class="{{ this.class }} sortable">
 					<td>
 						<a class="drag-item" data-artworkID="{{ this.id }}" href="/editor/pages/{{ ../page.id }}/galleries/{{ ../gallery.id }}/artworks/{{ this.id }}">
 							<img src="{{ this.square }}" style="max-width: 18px; border-radius: 15px"> {{ this.title }}

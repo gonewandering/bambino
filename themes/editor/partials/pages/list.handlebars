@@ -1,5 +1,21 @@
 <section id="pages" class="navigation">
-	<table class='table'>
+	<div class="title">
+		Pages
+	</div>
+	<ul class="sortable">
+		{{#each pages}}
+		<li>
+			<div class="pull-right label label-info">{{ this.Galleries.length }}</div>
+			<a href="/editor/pages/{{ this.id }}">{{ this.title }}</a>
+		</li>
+		{{/each }}
+		<li>
+			<a href="/editor/pages">Add +</a>
+		</li>
+	</ul>
+</section>
+
+	<!-- <table class='table'>
 		<thead>
 			<tr>
 				<th>
@@ -8,21 +24,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#each pages}}
-			<tr class="page-drop {{ this.class }}" data-pageID="{{ this.id }}">
+			<tr class="page-drop sortable {{ this.class }}" data-pageID="{{ this.id }}">
 				<td>
-					<div class="pull-right label label-info">{{ this.Galleries.length }}</div>
-					<a href="/editor/pages/{{ this.id }}">{{ this.title }}</a>
+
 				</td>
 			</tr>
-			{{/each }}
 		</tbody>
 		<tfoot>
 			<tr>
 				<td>
-					<a href="/editor/pages">Add +</a>
+
 				</td>
 			</tr>
 		</tfoot>
 	</table>
-</section>
+</section> -->

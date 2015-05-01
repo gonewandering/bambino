@@ -17,7 +17,7 @@
 			<label for="title">Page Template</label>
 			<select class="form-control input-lg" name="template" value="{{ page.template }}">
 				{{#each templates }}
-					<option value="{{ this.name }}">{{ this.name }}</option>
+					<option value="{{ this.name }}" {{#if this.name ../page.template }}selected="true"{{/if}}>{{ this.name }}</option>
 				{{/each }}
 			</select>
 		</div>

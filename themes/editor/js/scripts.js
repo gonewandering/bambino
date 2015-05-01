@@ -31,7 +31,10 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 
-	$('.dropbox').append(button);
+		$('.dropbox').append(button);
+
+	 $( ".sortable" ).sortable();
+	 $( ".sortable" ).disableSelection();
 
 	// Draggable
     $( ".drag-item" ).draggable({
