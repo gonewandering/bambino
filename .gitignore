@@ -1,26 +1,3 @@
 # Override these directories
 
 node_modules/
-data/*
-themes/*
-.sass-cache
-uploads/*
-
-
-# Override the config file
-
-config/config.js
-
-
-# Reverse for these files
-
-!themes/editor/*
-!themes/bambino/*
-!data/bambino-development
-
-
-# Oh, and get rid of this...
-
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
