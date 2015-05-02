@@ -1,0 +1,35 @@
+<div id="page-editor">
+	{{#if page.title }}
+		<div class="title">Edit {{ page.title }}</div>
+	{{else }}
+		<div class="title">Add Page</div>
+	{{/if }}
+	<form action="/editor/pages" method="post">
+		<div class="form-group">
+			<label for="title">Page Title</label>
+			<input class="form-control input-lg" type="text" name="title" value="{{ page.title }}" placeholder="Home page...">
+		</div>
+		<div class="form-group">
+			<label for="title">Page Slug</label>
+			<input class="form-control input-lg" type="text" name="slug" value="{{ page.slug }}" placeholder="Home page url...">
+		</div>
+		<div class="form-group">
+			<label for="title">Page Template</label>
+			<select class="form-control input-lg" name="template" value="{{ page.template }}">
+				{{#each templates }}
+					<option value="{{ this.name }}" {{#if this.name ../page.template }}selected="true"{{/if}}>{{ this.name }}</option>
+				{{/each }}
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="title">Metadescription for Page</label>
+			<input class="form-control input-lg" type="text" name="meta" value="{{ page.meta }}" placeholder="I am an artist...">
+		</div>
+		<div class="form-group">
+			<label for="title">Page Content?</label>
+			<textarea rows="12" name="content" class="form-control input-sm" placeholder="HTML Content for this page">{{ page.content }}</textarea>
+		</div>
+		<input type="hidden" name="id" value="{{ page.id }}">
+		<button class="btn btn-lg btn-info btn-block">Add/Update Page</button>
+	</form>
+</div>

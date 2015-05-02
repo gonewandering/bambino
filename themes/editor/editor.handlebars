@@ -1,0 +1,23 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-2">
+			{{> pages/list }}
+		</div>
+		<div class="col-sm-2">
+			{{> galleries/list }}
+		</div>
+		<div class="col-sm-2">
+			{{> artworks/list }}
+		</div>
+		<div class="col-sm-6">
+			<section class="editor">
+				<div id="editor">
+					{{#if page }}{{> pages/form }}{{/if }}
+					{{#if gallery }}{{> galleries/form }}{{/if }}
+					{{#if artwork }}{{> artworks/form }}{{/if }}
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+

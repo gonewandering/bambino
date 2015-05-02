@@ -1,0 +1,12 @@
+<table class="home-nav" style="width: 100%; text-align: center">
+  <tbody>
+    <tr>
+      {{#each Pages }}
+    		{{#unless this.active }}
+    		  <td><a class="fade" href="/{{ this.slug }}">{{ this.title }}</a></td>
+    		{{/unless }}
+    	{{/each }}
+      <td><a class="fade" href="https://www.facebook.com/emily.silver.9028?fref=ts">Facebook</a></td>
+    </tr>
+  </tbody>
+</table>

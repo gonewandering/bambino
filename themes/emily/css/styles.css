@@ -1,0 +1,154 @@
+body {
+  background: black;
+  color: white;
+  font-family: "Helvetica Nueue", "Helvetica";
+  background: black url(../img/background.jpg) top left no-repeat;
+  background-attachment: fixed; }
+
+h1, h2, h3, h4, h5 {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-style: italic; }
+
+h1 .subtitle, h2 .subtitle {
+  font-size: .65em;
+  text-transform: capitalize; }
+
+p {
+  font-size: 1.1em;
+  line-height: 2.2em;
+  font-style: italic; }
+
+a {
+  color: white;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out; }
+  a:hover {
+    color: white;
+    text-decoration: none;
+    opacity: .8; }
+
+.center {
+  text-align: center; }
+
+.fade.eas {
+  opacity: 0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out; }
+  .fade.eas.in {
+    opacity: 1; }
+
+a.fade {
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
+  a.fade:hover {
+    opacity: .8;
+    text-decoration: none; }
+
+.quote {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  font-style: italic;
+  color: #666; }
+
+.navigation-holder {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  max-width: 500px;
+  min-width: 500px; }
+
+.navigation, .home-nav {
+  padding-bottom: 4px; }
+  .navigation a, .home-nav a {
+    color: white;
+    text-transform: lowercase;
+    font-style: italic; }
+
+.home-nav {
+  margin-bottom: 4px; }
+
+.article {
+  margin-top: 80px;
+  max-width: 900px;
+  padding-right: 13%;
+  margin-bottom: 80px; }
+  .article h1 {
+    border-bottom: solid 1px white;
+    padding-bottom: 10px;
+    margin-bottom: 20px; }
+
+.modal {
+  color: black; }
+  .modal h5 {
+    margin-top: 16px; }
+  .modal a {
+    color: rgba(0, 0, 0, 0.7); }
+    .modal a:hover {
+      color: black; }
+  .modal p {
+    font-size: 1em;
+    line-height: 1.2em; }
+  .modal .modal-image {
+    background: black;
+    text-align: center; }
+  .modal p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0; }
+
+.matrix {
+  width: 100%;
+  overflow: hidden; }
+  .matrix .matrix-item {
+    width: 33.3333%;
+    float: left; }
+    .matrix .matrix-item .img-wrapper {
+      padding: 5px; }
+      .matrix .matrix-item .img-wrapper img {
+        width: 100%; }
+
+.matrix-footer {
+  font-style: italic;
+  padding-top: 5px;
+  text-align: center; }
+
+.gallery {
+  padding-top: 110px; }
+  .gallery .title {
+    padding-top: 170px; }
+  .gallery.home {
+    padding-top: 160px; }
+  .gallery .matrix-item > a > img {
+    height: 110px;
+    width: 110px; }
+
+@media (max-width: 800px) {
+  .gallery {
+    padding-top: 20px; }
+    .gallery .title {
+      padding-top: 10px;
+      text-align: center; }
+    .gallery .matrix-item img {
+      height: 110px;
+      width: 110px; } }
+@media (min-width: 800px) and (max-width: 1000px) {
+  .gallery {
+    padding-top: 80px; }
+    .gallery .title {
+      padding-top: 100px; }
+      .gallery .title h1 {
+        font-size: 2.5em; } }
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .gallery {
+    padding-top: 120px; }
+    .gallery .title {
+      padding-top: 140px; }
+      .gallery .title h1 {
+        font-size: 2.5em; } }
+
+/*# sourceMappingURL=styles.css.map */

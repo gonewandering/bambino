@@ -1,0 +1,36 @@
+<div class="container home gallery">
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-2">
+      {{> navigationHome }}
+			<div class="matrix fade eas">
+  			{{#each Page.Galleries.0.Artworks }}
+          <div class="matrix-item">
+            <div class="img-wrapper">
+              <a href="#" data-toggle="modal" data-target="#img-{{ this.id }}">
+                <img src="{{ this.square }}">
+              </a>
+              <div class="modal fade" id="img-{{ this.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ this.title }}" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <div class="modal-image">
+                        <img src="{{ this.display }}" />
+                      </div>
+                      <h5>{{ this.title }}</h5>
+                      <p>{{ this.description }}</p>
+                      <p>{{ this.size }} / {{ this.medium }} / <a href="{{ this.full }}">Download Full</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each }}
+      </div>
+		</div>
+
+    <div class="col-sm-6 title vcenter">
+        <h1>{{ Page.title }}</h1>
+    </div>
+	</div>
+</div>

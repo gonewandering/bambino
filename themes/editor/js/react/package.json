@@ -1,0 +1,17 @@
+{
+  "name": "louvre-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "6to5ify": "^4.1.1",
+    "browserify": "^10.0.0",
+    "react": "^0.13.2",
+    "watchify": "^3.2.1"
+  }
+}
