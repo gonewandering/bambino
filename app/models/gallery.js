@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-  var Gallery = sequelize.define('Gallery', { 
+  var Gallery = sequelize.define('Gallery', {
 	slug: DataTypes.STRING,
 	title: DataTypes.STRING,
   description: DataTypes.BLOB,
@@ -12,12 +12,22 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function (models) {
-        models.Gallery.belongsToMany(models.Page, models.pageGallery);
-        models.Page.belongsToMany(models.Gallery, models.pageGallery);
+        models.Gallery.belongsToMany(models.Page, {
+          through: {
+            model: models.PageGallery,
+            unique: true,
+          }
+        });
+
+        models.Page.belongsToMany(models.Gallery, {
+          through: {
+            model: models.PageGallery,
+            unique: true
+          }
+        });
       }
     }
   });
 
   return Gallery;
 };
-

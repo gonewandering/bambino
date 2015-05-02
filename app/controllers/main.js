@@ -10,7 +10,7 @@ module.exports = function (app) {
 
 var routes = {
 	get: function (req, res, next) {
-		var i = req.params.gid > 0 ? req.params.gid :  0,
+		var i = req.params.gid > 0 ? req.params.gid : null,
 			options = {};
 
 		res.options = res.options || {};
@@ -22,7 +22,11 @@ var routes = {
 		}
 
 		db.Page.findAll().success(function (pages) {
-			db.Page.findOne({include: [{all: true, nested: true}], where: {'slug': req.params.slug}}).success(function (page) {
+			db.Page.findOne({
+				include: [{all: true, nested: true}],
+		    order: ['Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order'],
+				where: {'slug': req.params.slug}
+				}).success(function (page) {
 
 				if (!page) { return next(); }
 
@@ -42,6 +46,10 @@ var routes = {
 					});
 
 					res.options.Page.Gallery = res.options.Page.Gallery[0] || false;
+
+					if (!res.options.Page.Gallery) {
+						res.options.Page.Gallery = res.options.Page.Galleries[0];
+					}
 				}
 
 				res.render(res.options.Page.template || 'main', res.options);

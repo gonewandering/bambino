@@ -1,41 +1,14 @@
 <section id="pages" class="navigation">
 	<div class="title">
+		<a class="pull-right" href="/editor/pages"><i class="fa fa-plus"></i></a>
 		Pages
 	</div>
-	<ul class="sortable">
+	<ul class="sortable list">
 		{{#each pages}}
-		<li>
+		<li class="page" data-type="pages" data-pid="{{ this.id }}">
 			<div class="pull-right label label-info">{{ this.Galleries.length }}</div>
 			<a href="/editor/pages/{{ this.id }}">{{ this.title }}</a>
 		</li>
 		{{/each }}
-		<li>
-			<a href="/editor/pages">Add +</a>
-		</li>
 	</ul>
 </section>
-
-	<!-- <table class='table'>
-		<thead>
-			<tr>
-				<th>
-					Pages
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="page-drop sortable {{ this.class }}" data-pageID="{{ this.id }}">
-				<td>
-
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td>
-
-				</td>
-			</tr>
-		</tfoot>
-	</table>
-</section> -->

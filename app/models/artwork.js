@@ -5,6 +5,7 @@ var GalleryArt = require('../models/galleryArt');
 module.exports = function (sequelize, DataTypes) {
 
   var Artwork = sequelize.define('Artwork', {
+  pieceId: DataTypes.STRING,
 	square: DataTypes.STRING,
 	display: DataTypes.STRING,
 	full: DataTypes.STRING,
@@ -16,8 +17,20 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function (models) {
-        models.Artwork.belongsToMany(models.Gallery, models.GalleryArt );
-        models.Gallery.belongsToMany(models.Artwork, models.GalleryArt );
+
+        models.Artwork.belongsToMany(models.Gallery, {
+          through: {
+            model: models.GalleryArt,
+            unique: true
+          }
+        });
+
+        models.Gallery.belongsToMany(models.Artwork, {
+          through: {
+            model: models.GalleryArt,
+            unique: true
+          }
+        });
       }
     }
   });

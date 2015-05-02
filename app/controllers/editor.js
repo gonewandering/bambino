@@ -142,8 +142,8 @@ router.post('/users/password', function (req, res, next) {
 
 router.get('/pages', function (req, res, next) {
   db.Page.findAll({
-    include: [{all: true}]
-  }).success(function (items) {
+    include: [{all: true, nested: true}]
+  }).on('sql', console.log).success(function (items) {
     options = { pages: items };
     getTemplates(function (err, templates) {
       options.templates = templates;
@@ -154,7 +154,8 @@ router.get('/pages', function (req, res, next) {
 
 router.get('/pages/:id', function (req, res, next) {
   db.Page.findAll({
-    include: [{all: true, nested: true}]
+    include: [{all: true, nested: true}],
+    order: ['Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order']
   }).success(function (items) {
     options = {
       pages: items,
@@ -195,12 +196,21 @@ router.post('/pages', function (req, res, next) {
   }
 });
 
+router.delete('/pages/:id', function (req, res, next) {
+  db.Page.destroy({where: { id: req.params.id }}).then(function () {
+    res.json("{success: true}");
+  })
+});
+
+
+
 // Setup Gallery
 
 router.get('/pages/:id/galleries', function (req, res, next) {
   db.Page.findAll({
-    include: [{all: true, nested: true}]
-  }).success(function (items) {
+    include: [{all: true, nested: true}],
+    order: ['Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order']
+  }).on('sql', console.log).success(function (items) {
     options = {
       pages: items,
       page: false
@@ -224,6 +234,7 @@ router.get('/pages/:id/galleries', function (req, res, next) {
 router.get('/pages/:id/galleries/:aid', function (req, res, next) {
   db.Page.findAll({
     include: [{all: true, nested: true}],
+    order: ['Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order']
   }).success(function (items) {
     options = {
       pages: items,
@@ -289,11 +300,44 @@ router.post('/pages/:id/galleries/:gid', function (req, res, next) {
   });
 });
 
+router.delete('/galleries/:gid', function (req, res, next) {
+  db.PageGallery.destroy({where: {GalleryId: req.params.gid}}).then(function () {
+    db.Gallery.destroy({where: {id: req.params.gid}}).then(function () {
+      res.json({"success": true});
+    });
+  });
+});
+
+router.delete('/pages/:id/galleries/:gid', function (req, res, next) {
+  db.PageGallery.destroy({where: {PageId: req.params.id, GalleryId: req.params.gid}}).then(function () {
+    res.json({"success": true});
+  });
+});
+
+
+router.post('/pages/:id/sort', function (req, res, next) {
+  db.PageGallery.findAll({where: { PageId: req.params.id }}).then(function (pgs) {
+    var items = req.body.order;
+
+    async.each(pgs, function (d, callback) {
+      var order = items.indexOf(String(d.GalleryId));
+      d.update({"order": order}).on('sql', console.log).then(function () {
+        callback();
+      })
+    }, function () {
+      res.json({"success": true});
+    });
+  });
+});
+
+
+
 // Setup Artwork
 
 router.get('/pages/:id/galleries/:aid/artworks', function (req, res, next) {
   db.Page.findAll({
     include: [{all: true, nested: true}],
+    order: ['Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order']
   }).success(function (items) {
     options = {
       pages: items,
@@ -332,6 +376,7 @@ router.get('/pages/:id/galleries/:aid/artworks', function (req, res, next) {
 router.get('/pages/:id/galleries/:aid/artworks/:gid', function (req, res, next) {
   db.Page.findAll({
     include: [{all: true, nested: true}],
+    order: ['Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order']
   }).success(function (items) {
 
     options = {
@@ -426,6 +471,46 @@ router.post('/galleries/:id/artworks/:aid', function (req, res, next) {
         res.json({"success": true});
       })
     });
+  });
+});
+
+
+router.post('/pages/:id/galleries/:gid/sort', function (req, res, next) {
+  db.GalleryArt.findAll({where: { GalleryId: req.params.gid }}).then(function (pgs) {
+    var items = req.body.order;
+
+    async.each(pgs, function (d, callback) {
+      var order = items.indexOf(String(d.ArtworkId));
+      d.update({"order": order}).on('sql', console.log).then(function () {
+        callback();
+      })
+    }, function () {
+      res.json({"success": true});
+    });
+  });
+});
+
+router.post('/pages/:id/galleries/:gid/', function (req, res, next) {
+  db.Page.find(req.params.id).then(function (page) {
+    db.Gallery.find(req.params.gid).then(function (gallery) {
+      gallery.addPage(page, { active: true, order: 0 }).then(function (result) {
+        res.json({"success": true});
+      })
+    });
+  });
+});
+
+router.delete('/artworks/:aid', function (req, res, next) {
+  db.GalleryArt.destroy({where: {ArtworkId: req.params.aid}}).then(function () {
+    db.Artwork.destroy({where: {id: req.params.aid}}).then(function () {
+      res.json({"success": true});
+    });
+  });
+});
+
+router.delete('/galleries/:gid/artworks/:aid', function (req, res, next) {
+  db.GalleryArt.destroy({where: {GalleryId: req.params.gid, ArtworkId: req.params.aid}}).then(function () {
+    res.json({"success": true});
   });
 });
 

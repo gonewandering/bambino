@@ -42,7 +42,7 @@ a {
 
 .fade.eas {
   opacity: 0;
-  @include transition(opacity 2s ease-in-out);
+  @include transition(opacity 1s ease-in-out);
 
   &.in {
     opacity: 1;
@@ -75,13 +75,18 @@ a.fade {
   max-width: 500px;
   min-width: 500px;
 }
-.navigation {
+
+.navigation, .home-nav {
     a {
       color: white;
       text-transform: lowercase;
       font-style: italic;
     }
     padding-bottom: 4px;
+}
+
+.home-nav {
+  margin-bottom: 4px;
 }
 
 .article {
@@ -140,6 +145,12 @@ a.fade {
       }
     }
   }
+}
+
+.matrix-footer {
+  font-style: italic;
+  padding-top: 5px;
+  text-align: center;
 }
 
 // Home page styles

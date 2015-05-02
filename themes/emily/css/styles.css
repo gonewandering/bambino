@@ -34,9 +34,9 @@ a {
 
 .fade.eas {
   opacity: 0;
-  -webkit-transition: opacity 2s ease-in-out;
-  -moz-transition: opacity 2s ease-in-out;
-  transition: opacity 2s ease-in-out; }
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out; }
   .fade.eas.in {
     opacity: 1; }
 
@@ -63,12 +63,15 @@ a.fade {
   max-width: 500px;
   min-width: 500px; }
 
-.navigation {
+.navigation, .home-nav {
   padding-bottom: 4px; }
-  .navigation a {
+  .navigation a, .home-nav a {
     color: white;
     text-transform: lowercase;
     font-style: italic; }
+
+.home-nav {
+  margin-bottom: 4px; }
 
 .article {
   margin-top: 80px;
@@ -108,6 +111,11 @@ a.fade {
       padding: 5px; }
       .matrix .matrix-item .img-wrapper img {
         width: 100%; }
+
+.matrix-footer {
+  font-style: italic;
+  padding-top: 5px;
+  text-align: center; }
 
 .gallery {
   padding-top: 110px; }
