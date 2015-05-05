@@ -84,9 +84,32 @@ a.fade {
     margin-bottom: 20px; }
 
 .modal {
-  color: black; }
+  color: white;
+  text-align: center; }
+  .modal .modal-dialog {
+    margin-left: auto;
+    margin-right: auto; }
+  .modal .modal-content {
+    background: transparent; }
+  .modal .modal-body {
+    padding: 0;
+    margin: 0; }
+  .modal .arrow {
+    position: fixed; }
+    .modal .arrow h1 {
+      font-size: 6em; }
+      .modal .arrow h1 a {
+        color: white;
+        opacity: .5; }
+    .modal .arrow.forward-one {
+      right: 50px;
+      top: 40%; }
+    .modal .arrow.back-one {
+      left: 50px;
+      top: 40%; }
   .modal h5 {
-    margin-top: 16px; }
+    margin-top: 16px;
+    font-size: 1.25em; }
   .modal a {
     color: rgba(0, 0, 0, 0.7); }
     .modal a:hover {
@@ -95,11 +118,14 @@ a.fade {
     font-size: 1em;
     line-height: 1.2em; }
   .modal .modal-image {
-    background: black;
+    background: transparent;
     text-align: center; }
   .modal p:last-child {
     margin-bottom: 0;
     padding-bottom: 0; }
+
+.modal-backdrop.in {
+  opacity: .85; }
 
 .matrix {
   width: 100%;
@@ -111,6 +137,10 @@ a.fade {
       padding: 5px; }
       .matrix .matrix-item .img-wrapper img {
         width: 100%; }
+    .matrix .matrix-item.modal-show {
+      display: block !important; }
+      .matrix .matrix-item.modal-show .img-wrapper {
+        display: none !important; }
 
 .matrix-footer {
   font-style: italic;
@@ -126,6 +156,9 @@ a.fade {
   .gallery .matrix-item > a > img {
     height: 110px;
     width: 110px; }
+
+.gallery-list {
+  font-style: italic; }
 
 @media (max-width: 800px) {
   .gallery {
