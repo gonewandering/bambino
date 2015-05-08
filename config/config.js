@@ -1,11 +1,12 @@
 var path = require('path'),
     rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'development';
+    env = process.env.NODE_ENV || 'development',
+    _ = require('underscore');
 
 var config = {
   development: {
     root: rootPath,
-    theme: 'emily/',
+    theme: 'emily',
     app: {
       name: 'emilysilver'
     },
@@ -14,7 +15,7 @@ var config = {
 
   test: {
     root: rootPath,
-    theme: 'emily/',
+    theme: 'emily',
     app: {
       name: 'emilysilver'
     },
@@ -23,7 +24,7 @@ var config = {
 
   production: {
     root: rootPath,
-    theme: 'emily/',
+    theme: 'emily',
     app: {
       name: 'emilysilver'
     },

@@ -23,10 +23,10 @@ var routes = {
 
 		db.Page.findAll().success(function (pages) {
 			db.Page.findOne({
-				include: [{all: true, nested: true}],
-		    order: ['Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order'],
-				where: {'slug': req.params.slug}
-				}).success(function (page) {
+				include: [{ all: true, nested: true }],
+		    order: [ 'Galleries.PageGallery.order', 'Galleries.Artworks.GalleryArt.order' ],
+				where: { 'slug': req.params.slug }
+			}).success(function (page) {
 
 				if (!page) { return next(); }
 

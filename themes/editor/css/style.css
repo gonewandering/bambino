@@ -1,5 +1,6 @@
 @charset "UTF-8";
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -5638,12 +5639,25 @@ button.close {
 body {
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
   background: #7b7b7b;
   margin-left: 50px;
   font-weight: 300; }
 
+a {
+  color: #74b4fc; }
+
+.btn.btn-info {
+  background: #74b4fc;
+  border: none; }
+
+.label-info {
+  background: #74b4fc; }
+
 section {
-  border-right: solid 1px #d4d4d4;
+  border-right: solid 1px #626262;
   height: 100vh;
   overflow-y: scroll; }
   section:first-child {
@@ -5652,9 +5666,7 @@ section {
     background: #7b7b7b;
     box-shadow: 0 0 2px rgba(85, 85, 85, 0.7); }
   section.navigation {
-    background: #7b7b7b;
-    border-left: 1px solid rgba(85, 85, 85, 0.6);
-    box-shadow: 0 0 2px rgba(85, 85, 85, 0.7); }
+    background: #7b7b7b; }
     section.navigation thead {
       background: #6e6e6e;
       color: #EEE; }
@@ -5686,14 +5698,14 @@ section.sidebar {
   border-right: none;
   background: #555555; }
   section.sidebar h1 {
-    color: white;
+    color: #74b4fc;
     text-align: center;
     margin: 0;
     padding: 0;
     font-size: 18px;
     padding-top: 24px; }
     section.sidebar h1 a {
-      color: #d4d4d4; }
+      color: white; }
   section.sidebar h1.logo {
     padding-top: 12px;
     font-size: 30px; }
@@ -5702,7 +5714,7 @@ a {
   color: #00B7FF; }
 
 .active-drag {
-  background: #5bc0de !important; }
+  background: #74b4fc !important; }
   .active-drag a {
     color: white !important; }
 
@@ -5739,7 +5751,9 @@ a {
   border: none !important;
   padding: 8px 0px 12px  0px !important;
   border-radius: 0 !important;
-  text-align: center; }
+  text-align: center;
+  background: #555555 !important;
+  color: #EEE !important; }
 
 .navbar {
   margin-bottom: 0; }
@@ -5756,17 +5770,19 @@ ul.list {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #EEE; }
+    color: #c8c8c8; }
     ul.list li i {
       color: #a2a2a2; }
+    ul.list li i.fa-ellipsis-v {
+      margin-right: 5px; }
     ul.list li a {
-      color: #EEE;
+      color: #c8c8c8;
       text-decoration: none;
       white-space: nowrap; }
     ul.list li.ui-sortable-helper {
       transition: background-color .5s linear;
       -webkit-transition: background-color .5s linear;
-      background-color: #5bc0de !important; }
+      background-color: #74b4fc !important; }
       ul.list li.ui-sortable-helper a {
         color: white !important; }
 

@@ -38,11 +38,11 @@ jQuery(document).ready(function ($) {
 
 	var sortUpdateGallery = function (e, dom) {
 		var type = dom.item.data("type"),
-			order = [], id = dom.item.data("id"),
-			pid = dom.item.data("page");
+			order = [], id = dom.item.data("gid"),
+			pid = dom.item.data("pid");
 
 		dom.item.parents('ul').children('li').each(function (d) {
-			order.push($(this).data('id'));
+			order.push($(this).data('gid'));
 		});
 
 		$.post("/editor/pages/" + pid + "/sort", {
@@ -55,13 +55,15 @@ jQuery(document).ready(function ($) {
 	var sortUpdateArtwork = function (e, dom) {
 		var type = dom.item.data("type"),
 			order = [],
-			id = dom.item.data("id"),
-			gid = dom.item.data("gallery"),
-			pid = dom.item.data("page");
+			id = dom.item.data("aid"),
+			gid = dom.item.data("gid"),
+			pid = dom.item.data("pid");
 
 		dom.item.parents('ul').children('li').each(function (d) {
-			order.push($(this).data('id'));
+			order.push($(this).data('aid'));
 		});
+
+		console.log(order);
 
 		$.post("/editor/pages/" + pid + "/galleries/" + gid +"/sort", {
 			order: order

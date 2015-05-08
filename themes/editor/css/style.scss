@@ -1,18 +1,36 @@
 @import '../components/bootstrap-sass/assets/stylesheets/bootstrap.scss';
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 $gray: #EEE;
 $blue: rgb(91, 192, 222);
+$blue2: #74b4fc;
 
 body {
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
   background: darken($gray, 45);
   margin-left: 50px;
   font-weight: 300;
 }
 
+a {
+  color: $blue2;
+}
+
+.btn.btn-info {
+  background: $blue2;
+  border: none;
+}
+
+.label-info {
+  background: $blue2;
+}
+
 section {
-	border-right: solid 1px darken($gray, 10);
+	border-right: solid 1px darken($gray, 55);
 	height: 100vh;
 	overflow-y: scroll;
 
@@ -27,8 +45,7 @@ section {
 
 	&.navigation {
 		background: darken($gray, 45);
-		border-left: 1px solid rgba(darken($gray, 60), .6);
-		box-shadow: 0 0 2px rgba(darken($gray, 60), .7);
+
 
 		thead {
 			background: darken($gray, 50);
@@ -83,14 +100,14 @@ section.sidebar {
 	border-right: none;
 	background: darken($gray, 60);
 	h1 {
-		color: white;
+		color: $blue2;
 		text-align: center;
 		margin: 0;
 		padding: 0;
 		font-size: 18px;
 		padding-top: 24px;
 		a {
-			color: darken($gray, 10);
+			color: white;
 		}
 	}
 
@@ -105,7 +122,7 @@ a {
 }
 
 .active-drag {
-  background: $blue !important;
+  background: $blue2 !important;
   a {
     color: white !important;
   }
@@ -158,6 +175,8 @@ a {
   padding: 8px 0px 12px  0px !important;
   border-radius: 0 !important;
   text-align: center;
+  background: darken($gray, 60) !important;
+  color: $gray !important;
 }
 
 .navbar {
@@ -176,14 +195,18 @@ ul.list {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: $gray;
+    color: darken($gray, 15);
 
     i {
       color: darken($gray, 30);
     }
 
+    i.fa-ellipsis-v {
+      margin-right: 5px;
+    }
+
     a {
-      color: $gray;
+      color: darken($gray, 15);
       text-decoration: none;
       white-space: nowrap;
     }
@@ -191,7 +214,7 @@ ul.list {
     &.ui-sortable-helper {
       transition: background-color .5s linear;
       -webkit-transition: background-color .5s linear;
-      background-color: $blue !important;
+      background-color: $blue2 !important;
       a {
         color: white !important;
       }

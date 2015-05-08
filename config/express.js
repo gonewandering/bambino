@@ -10,6 +10,7 @@ var methodOverride = require('method-override');
 var exphbs  = require('express-handlebars');
 var session = require('express-session');
 var helpers = require('./helpers');
+var _ = require('underscore');
 
 module.exports = function(app, config) {
 
