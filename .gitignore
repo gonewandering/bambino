@@ -1,3 +1,5 @@
 # Override these directories
 
 node_modules/
+data/
+uploads/
