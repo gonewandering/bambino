@@ -100,6 +100,12 @@ module.exports = {
       var id = req.body.id;
       delete req.body.id;
 
+      if (req.body.created) {
+        req.body.created = new Date(req.body.created);
+
+        console.log(req.body.created);
+      }
+
       db.Artwork.update(req.body, { where: { id: Number(id) }}).then(function (item) {
         db.Gallery.find(req.params.aid).then(function (gallery) {
           if (req.body.square.indexOf("https://") > -1) {
